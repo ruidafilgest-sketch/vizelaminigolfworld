@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vizela · Minigolf · World</title>
+<meta name="description" content="O portal independente do minigolfe em Vizela e no mundo. Portugal, berço do minigolfe. SWC 2026 em destaque.">
+<meta property="og:title" content="Vizela · Minigolf · World">
+<meta property="og:description" content="O portal independente do minigolfe em Vizela e no mundo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#08122a;
+  --navy2:#0d1a38;
+  --navy3:#132244;
+  --blue:#1a3a6b;
+  --blue2:#1e4d8c;
+  --gold:#c8943a;
+  --gold2:#e8b04a;
+  --gold3:#f5c96a;
+  --ink:#060e20;
+  --text:#1a2540;
+  --muted:#4a587a;
+  --sage:#e8ecf2;
+  --sage2:#dde3ed;
+  --sage3:#d0d9e8;
+  --white:#ffffff;
+  --border:rgba(26,58,107,0.15);
+  --border2:rgba(26,58,107,0.25);
+  --border-gold:rgba(200,148,58,0.3);
+  --forest:#1b5e35;
+  --forest2:#2d7a4f;
+  --gold-var:#b8860b;
+  --ink2:#0d1520;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--sage);color:var(--text);font-family:'Barlow',sans-serif;overflow-x:hidden;}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--sage2);}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px;}
+
+/* HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  height:66px;
+  background:rgba(8,18,42,0.97);
+  border-bottom:1px solid rgba(200,148,58,0.18);
+  backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 44px;
+}
+.logo{display:flex;flex-direction:column;text-decoration:none;cursor:pointer;}
+.logo-main{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white);letter-spacing:0.5px;line-height:1.1;}
+.logo-main .sep{color:var(--gold2);margin:0 7px;font-weight:300;opacity:0.6;}
+.logo-main .world{color:var(--gold2);font-style:italic;}
+.logo-sub{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px;}
+
+nav{display:flex;align-items:center;gap:2px;}
+.nb{padding:7px 14px;border-radius:4px;border:none;background:none;font-family:'Barlow',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.3px;color:rgba(255,255,255,0.45);cursor:pointer;transition:all 0.15s;}
+.nb:hover{color:var(--gold2);background:rgba(200,148,58,0.08);}
+
+.lang-row{display:flex;gap:3px;}
+.lb{padding:5px 9px;border-radius:3px;border:1px solid rgba(200,148,58,0.22);background:none;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.5px;color:rgba(255,255,255,0.4);cursor:pointer;transition:all 0.15s;}
+.lb:hover{color:var(--gold2);border-color:var(--gold);}
+.lb.on{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700;}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 44px 80px;}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('https://img.youtube.com/vi/1QHeRhyLy6g/maxresdefault.jpg');
+  background-size:cover;background-position:center 35%;
+  filter:saturate(0.55) brightness(0.28) contrast(1.2);
+  transform:scale(1.06);transition:transform 14s ease;
+}
+.hero-bg.loaded{transform:scale(1);}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(175deg,rgba(8,18,42,0.88) 0%,rgba(8,18,42,0.35) 38%,rgba(8,18,42,0.6) 72%,rgba(8,18,42,0.98) 100%),
+    radial-gradient(ellipse 70% 55% at 50% 38%,rgba(26,58,107,0.4) 0%,transparent 65%);
+}
+
+/* PARTICLES */
+.hero-particles{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;}
+.p{position:absolute;border-radius:50%;background:var(--gold2);animation:float linear infinite;}
+.p:nth-child(1){width:3px;height:3px;left:12%;top:18%;opacity:0.45;animation-duration:9s;}
+.p:nth-child(2){width:2px;height:2px;left:72%;top:32%;opacity:0.3;animation-duration:12s;animation-delay:2.5s;}
+.p:nth-child(3){width:4px;height:4px;left:42%;top:12%;opacity:0.22;animation-duration:10s;animation-delay:4s;}
+.p:nth-child(4){width:2px;height:2px;left:83%;top:58%;opacity:0.38;animation-duration:14s;animation-delay:1s;}
+.p:nth-child(5){width:3px;height:3px;left:22%;top:68%;opacity:0.2;animation-duration:11s;animation-delay:3.5s;}
+.p:nth-child(6){width:2px;height:2px;left:58%;top:78%;opacity:0.28;animation-duration:13s;animation-delay:5s;}
+.p:nth-child(7){width:2px;height:2px;left:35%;top:85%;opacity:0.18;animation-duration:15s;animation-delay:7s;}
+@keyframes float{0%{transform:translateY(0) rotate(0deg);opacity:0;}10%{opacity:0.45;}88%{opacity:0.15;}100%{transform:translateY(-90px) rotate(360deg);opacity:0;}}
+
+.hero-content{position:relative;z-index:2;max-width:900px;}
+
+.hero-line{width:0;height:2px;background:linear-gradient(to right,transparent,var(--gold2),transparent);margin:0 auto 30px;animation:expandLine 1s cubic-bezier(0.16,1,0.3,1) 0.2s both;}
+@keyframes expandLine{from{width:0;opacity:0;}to{width:70px;opacity:1;}}
+
+.hero-kicker{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:30px;
+  animation:rise 1s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+}
+
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(56px,9.5vw,116px);
+  font-weight:700;line-height:0.9;letter-spacing:-2px;
+  margin-bottom:0;
+}
+.word-vizela{
+  display:block;color:#ffffff;
+  animation:rise 1s cubic-bezier(0.16,1,0.3,1) 0.42s both;
+}
+.word-minigolf{
+  display:block;color:var(--gold2);font-style:italic;
+  animation:rise 1s cubic-bezier(0.16,1,0.3,1) 0.56s both;
+}
+.word-world{
+  display:block;color:#ffffff;
+  animation:rise 1s cubic-bezier(0.16,1,0.3,1) 0.7s both;
+}
+.word-dot{color:var(--gold);opacity:0.5;font-size:0.38em;vertical-align:middle;margin:0 14px;font-style:normal;}
+
+.hero-divider{width:0;height:1px;background:linear-gradient(to right,transparent,rgba(232,176,74,0.45),transparent);margin:30px auto;animation:expandLine 0.8s ease 0.85s both;}
+
+.hero-tagline{
+  font-size:clamp(15px,2vw,20px);color:rgba(255,255,255,0.72);
+  font-weight:300;line-height:1.72;margin:0 auto 52px;letter-spacing:0.4px;
+  max-width:640px;
+  animation:rise 1s cubic-bezier(0.16,1,0.3,1) 0.9s both;
+}
+
+/* SWC BADGE */
+.swc-badge{
+  display:inline-flex;flex-direction:column;align-items:center;
+  background:rgba(8,18,42,0.72);
+  border:1px solid rgba(200,148,58,0.4);
+  border-top:2px solid var(--gold);
+  padding:26px 52px;
+  animation:rise 1s cubic-bezier(0.16,1,0.3,1) 1.0s both;
+  backdrop-filter:blur(14px);
+  box-shadow:0 24px 64px rgba(0,0,0,0.55),0 0 0 1px rgba(200,148,58,0.08),inset 0 1px 0 rgba(200,148,58,0.12);
+  position:relative;
+}
+.swc-badge::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:40px;height:2px;background:var(--gold2);}
+.swc-kicker{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(232,176,74,0.7);margin-bottom:10px;}
+.swc-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#ffffff;margin-bottom:6px;letter-spacing:0.3px;}
+.swc-date{font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:3px;margin-bottom:22px;font-weight:600;text-transform:uppercase;}
+.swc-cd{display:flex;gap:36px;}
+.cd-unit{text-align:center;position:relative;}
+.cd-unit:not(:last-child)::after{content:'·';position:absolute;right:-22px;top:8px;color:rgba(200,148,58,0.25);font-size:22px;}
+.cd-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:var(--gold2);line-height:1;display:block;letter-spacing:-1px;}
+.cd-l{font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:3px;text-transform:uppercase;margin-top:5px;}
+
+@keyframes rise{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
+/* BAND */
+.band{background:var(--navy2);display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;border-bottom:1px solid rgba(200,148,58,0.12);}
+.band-item{padding:16px 28px;display:flex;flex-direction:column;align-items:center;border-right:1px solid rgba(255,255,255,0.06);}
+.band-item:last-child{border-right:none;}
+.band-n{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold2);line-height:1;}
+.band-l{font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+
+.page{max-width:1120px;margin:0 auto;}
+section{padding:80px 44px;}
+.section-kicker{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue2);display:block;margin-bottom:10px;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.5vw,50px);font-weight:700;color:var(--navy);line-height:1.1;margin-bottom:18px;}
+.section-title em{color:var(--blue);font-style:italic;}
+.section-lead{font-size:16px;color:var(--muted);line-height:1.75;max-width:580px;font-weight:300;}
+.divider{height:1px;background:var(--border2);margin:0 44px;}
+
+/* NEWS */
+.news-bg{background:#dce3f0;}
+.news-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border2);margin-top:44px;border:1px solid var(--border2);}
+.news-card{background:#e8edf8;padding:28px;transition:background 0.2s;cursor:pointer;position:relative;}
+.news-card:hover{background:#dce3f0;}
+.news-card.lead{grid-column:span 2;border-right:1px solid var(--border2);}
+.nc-kicker{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;display:inline-block;}
+.kicker-swc{color:var(--gold);}
+.kicker-nat{color:var(--blue);}
+.kicker-loc{color:var(--blue2);}
+.kicker-int{color:var(--navy3);}
+.nc-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:10px;}
+.news-card.lead .nc-title{font-size:28px;}
+.nc-text{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300;}
+.nc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);}
+.nc-date{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:0.3px;}
+.nc-arrow{font-size:16px;color:var(--blue);font-weight:300;}
+
+/* SWC SECTION */
+.swc-sec{background:var(--navy);position:relative;overflow:hidden;}
+.swc-sec::before{content:'';position:absolute;inset:0;background-image:url('https://img.youtube.com/vi/sNOPNcMESA0/maxresdefault.jpg');background-size:cover;background-position:center;opacity:0.06;}
+.swc-sec .section-kicker{color:var(--gold2);}
+.swc-sec .section-title{color:var(--white);}
+.swc-sec .section-title em{color:var(--gold2);}
+.swc-sec .section-lead{color:rgba(255,255,255,0.5);}
+.swc-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:50px;position:relative;z-index:1;}
+.swc-facts{display:flex;flex-direction:column;gap:0;border:1px solid rgba(255,255,255,0.07);}
+.sf{display:flex;align-items:flex-start;gap:20px;padding:20px 22px;border-bottom:1px solid rgba(255,255,255,0.06);transition:background 0.15s;}
+.sf:last-child{border-bottom:none;}
+.sf:hover{background:rgba(255,255,255,0.03);}
+.sf-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);min-width:100px;flex-shrink:0;margin-top:2px;}
+.sf-val{font-size:14px;color:rgba(255,255,255,0.72);line-height:1.55;font-weight:300;}
+.sf-val strong{color:var(--white);font-weight:500;}
+
+.team-block{position:relative;z-index:1;}
+.team-kicker{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold2);margin-bottom:20px;}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.athlete{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid rgba(255,255,255,0.07);transition:border-color 0.15s;}
+.athlete:hover{border-color:rgba(200,148,58,0.3);}
+.ath-init{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;color:var(--white);flex-shrink:0;}
+.init-m{background:var(--blue);}
+.init-f{background:var(--gold);}
+.ath-name{font-size:12px;font-weight:500;color:var(--white);line-height:1.2;}
+.ath-cat{font-size:10px;color:rgba(255,255,255,0.32);letter-spacing:0.3px;}
+
+/* HISTORY */
+.hist-sec{background:#dce3f0;}
+.hist-layout{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;margin-top:50px;}
+.hist-text p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:16px;font-weight:300;}
+.hist-text p strong{color:var(--navy);font-weight:600;}
+.timeline{position:relative;padding-left:30px;}
+.timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:1px;background:var(--border2);}
+.tl-item{position:relative;margin-bottom:28px;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-dot{position:absolute;left:-30px;top:4px;width:13px;height:13px;border-radius:50%;background:var(--blue);border:2px solid var(--sage);box-shadow:0 0 0 1px var(--blue2);}
+.tl-item.gold-item .tl-dot{background:var(--gold);box-shadow:0 0 0 1px var(--gold2);}
+.tl-year{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px;}
+.tl-item.gold-item .tl-year{color:var(--gold);}
+.tl-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:3px;}
+.tl-desc{font-size:13px;color:var(--muted);line-height:1.55;font-weight:300;}
+
+/* COUNTRIES */
+.countries-sec{background:var(--navy);position:relative;overflow:hidden;}
+.countries-sec::before{content:'';position:absolute;inset:0;background-image:url('https://img.youtube.com/vi/w2QjfL3ClO8/maxresdefault.jpg');background-size:cover;background-position:center;opacity:0.05;}
+.countries-sec .section-kicker{color:rgba(255,255,255,0.45);}
+.countries-sec .section-title{color:var(--white);}
+.countries-sec .section-title em{color:var(--gold2);}
+.countries-sec .section-lead{color:rgba(255,255,255,0.55);}
+.countries-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:44px;position:relative;z-index:1;}
+.country{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);padding:14px 10px;text-align:center;transition:all 0.2s;cursor:default;}
+.country:hover{background:rgba(232,176,74,0.08);border-color:rgba(200,148,58,0.2);}
+.c-flag{font-size:26px;display:block;margin-bottom:6px;}
+.c-name{font-size:11px;color:rgba(255,255,255,0.65);font-weight:500;}
+.c-note{grid-column:1/-1;font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.5px;font-style:italic;margin-top:6px;position:relative;z-index:1;}
+
+/* VIZELA */
+.vizela-sec{background:#d5dded;}
+.vizela-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:50px;}
+.vizela-text p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:16px;font-weight:300;}
+.vizela-text p strong{color:var(--navy);font-weight:600;}
+.vizela-facts{display:flex;flex-direction:column;gap:0;border:1px solid var(--border2);}
+.vf{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:18px 20px;border-bottom:1px solid var(--border);align-items:flex-start;background:#dce3f0;}
+.vf:last-child{border-bottom:none;}
+.vf-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:var(--blue);margin-top:1px;}
+.vf-icon svg{width:14px;height:14px;fill:none;stroke:var(--white);stroke-width:1.8;}
+.vf-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:2px;}
+.vf-desc{font-size:12px;color:var(--muted);line-height:1.5;font-weight:300;}
+
+/* GALLERY */
+.gallery-sec{background:#cdd6e8;}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:220px 220px;gap:8px;margin-top:44px;}
+.gallery-item{background:var(--sage2);overflow:hidden;position:relative;cursor:pointer;}
+.gallery-item:first-child{grid-row:span 2;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;filter:saturate(0.82);transition:transform 0.4s ease,filter 0.3s;}
+.gallery-item:hover img{transform:scale(1.04);filter:saturate(1);}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:12px 14px;background:linear-gradient(to top,rgba(8,18,42,0.75),transparent);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.8);}
+.gallery-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);border:1px dashed var(--border2);}
+.gp-icon{width:24px;height:24px;opacity:0.4;}
+.gp-text{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:0.5;}
+
+/* DIARY */
+.diary-sec{background:#d5dded;}
+.diary-list{margin-top:44px;display:flex;flex-direction:column;gap:0;border:1px solid var(--border2);}
+.diary-item{display:grid;grid-template-columns:90px 1fr;gap:0;border-bottom:1px solid var(--border);transition:background 0.15s;}
+.diary-item:last-child{border-bottom:none;}
+.diary-item:hover{background:rgba(26,58,107,0.04);}
+.diary-item.swc-entry{border-left:3px solid var(--gold);}
+.diary-item.swc-entry .di-day{color:var(--gold);}
+.di-date{padding:22px 20px;border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;background:#cdd6e8;}
+.di-day{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--blue);line-height:1;}
+.di-month{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.di-body{padding:22px 26px;background:#dce3f0;}
+.di-tag{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:2px 8px;margin-bottom:8px;display:inline-block;}
+.tag-swc{background:rgba(200,148,58,0.12);color:var(--gold);}
+.tag-nat{background:rgba(26,58,107,0.1);color:var(--blue);}
+.di-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.di-text{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300;}
+
+/* LINKS */
+.links-sec{background:var(--navy2);}
+.links-sec .section-kicker{color:rgba(255,255,255,0.35);}
+.links-sec .section-title{color:var(--white);}
+.links-sec .section-title em{color:var(--gold2);}
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,0.05);margin-top:44px;border:1px solid rgba(255,255,255,0.05);}
+.link-card{background:rgba(255,255,255,0.03);padding:26px 24px;text-decoration:none;display:flex;flex-direction:column;gap:10px;transition:background 0.15s;}
+.link-card:hover{background:rgba(200,148,58,0.06);}
+.lc-type{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold2);}
+.lc-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white);line-height:1.2;}
+.lc-desc{font-size:12px;color:rgba(255,255,255,0.38);line-height:1.5;font-weight:300;}
+.lc-url{font-size:11px;color:rgba(255,255,255,0.22);margin-top:4px;}
+.lc-arrow{color:var(--gold2);font-size:18px;margin-top:auto;}
+
+/* FOOTER */
+footer{background:var(--ink2);padding:56px 44px 32px;}
+.footer-top{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:24px;}
+.footer-brand .fb-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.footer-brand .fb-name .sep{color:var(--gold2);font-weight:300;}
+.footer-brand .fb-name .world{color:var(--gold2);font-style:italic;}
+.footer-brand .fb-desc{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.7;font-weight:300;max-width:320px;}
+.footer-note{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:18px 20px;align-self:start;}
+.fn-label{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:8px;display:block;}
+.fn-text{font-size:12px;color:rgba(255,255,255,0.3);line-height:1.65;font-weight:300;}
+.footer-copy{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.fc-left{font-size:11px;color:rgba(255,255,255,0.18);}
+.fc-left strong{color:rgba(255,255,255,0.38);font-weight:500;}
+.fc-right{font-size:11px;color:rgba(255,255,255,0.13);}
+
+@media(max-width:900px){
+  header{padding:0 20px;}
+  nav{display:none;}
+  section{padding:56px 20px;}
+  .hero{padding:90px 22px 70px;}
+  .band-item{padding:12px 16px;}
+  .news-grid{grid-template-columns:1fr;}
+  .news-card.lead{grid-column:span 1;}
+  .swc-layout,.hist-layout,.vizela-layout,.footer-top{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .gallery-item:first-child{grid-row:span 1;}
+  .divider{margin:0 20px;}
+  footer{padding:44px 20px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#" onclick="goTop()">
+    <div class="logo-main">Vizela<span class="sep">·</span>Minigolf<span class="sep">·</span><span class="world">World</span></div>
+    <div class="logo-sub" data-t="logo_sub">Portal Independente do Minigolfe</div>
+  </a>
+  <nav>
+    <button class="nb" onclick="go('news')" data-t="nav_news">Notícias</button>
+    <button class="nb" onclick="go('swc')" data-t="nav_swc">SWC 2026</button>
+    <button class="nb" onclick="go('hist')" data-t="nav_hist">História</button>
+    <button class="nb" onclick="go('vizela')" data-t="nav_vizela">Vizela</button>
+    <button class="nb" onclick="go('gallery')" data-t="nav_gallery">Galeria</button>
+    <button class="nb" onclick="go('links')" data-t="nav_links">Federações</button>
+  </nav>
+  <div class="lang-row">
+    <button class="lb on" onclick="setL('pt')">PT</button>
+    <button class="lb" onclick="setL('en')">EN</button>
+    <button class="lb" onclick="setL('es')">ES</button>
+    <button class="lb" onclick="setL('de')">DE</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles">
+    <div class="p"></div><div class="p"></div><div class="p"></div>
+    <div class="p"></div><div class="p"></div><div class="p"></div><div class="p"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-line"></div>
+    <div class="hero-kicker" data-t="hero_kicker">Vizela · Portugal · Berço do Minigolfe · Desde 1968</div>
+    <h1 class="hero-title">
+      <span class="word-vizela">Vizela</span>
+      <span class="word-minigolf"><span class="word-dot">·</span>Minigolf<span class="word-dot">·</span></span>
+      <span class="word-world">World</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline" data-t="hero_tagline">Uma cidade. Uma paixão. Uma história de mais de 55 anos.<br>Vizela e o minigolfe — dois nomes que o mundo passou a conhecer juntos.</p>
+    <div class="swc-badge">
+      <div class="swc-kicker" data-t="swc_kicker">Em destaque · SWC 2026</div>
+      <div class="swc-name" data-t="swc_name">Campeonato do Mundo Sénior · Vizela</div>
+      <div class="swc-date">14 — 17 Outubro · Vizela, Portugal</div>
+      <div class="swc-cd">
+        <div class="cd-unit"><span class="cd-n" id="cd-d">—</span><div class="cd-l" data-t="cd_d">dias</div></div>
+        <div class="cd-unit"><span class="cd-n" id="cd-h">—</span><div class="cd-l" data-t="cd_h">horas</div></div>
+        <div class="cd-unit"><span class="cd-n" id="cd-m">—</span><div class="cd-l" data-t="cd_m">min</div></div>
+        <div class="cd-unit"><span class="cd-n" id="cd-s">—</span><div class="cd-l" data-t="cd_s">seg</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BAND -->
+<div class="band">
+  <div class="band-item"><div class="band-n">1968</div><div class="band-l" data-t="band1">Fundação em Vizela</div></div>
+  <div class="band-item"><div class="band-n">55+</div><div class="band-l" data-t="band2">Anos de história</div></div>
+  <div class="band-item"><div class="band-n">4</div><div class="band-l" data-t="band3">Eventos internacionais</div></div>
+  <div class="band-item"><div class="band-n">14</div><div class="band-l" data-t="band4">Países SWC anterior</div></div>
+  <div class="band-item"><div class="band-n">14–17</div><div class="band-l" data-t="band5">Outubro 2026</div></div>
+</div>
+
+<!-- NEWS -->
+<section class="news-bg" id="news">
+  <div class="page">
+    <span class="section-kicker" data-t="s_news_k">Últimas notícias</span>
+    <h2 class="section-title" data-t="s_news_t">O que está a <em>acontecer</em></h2>
+    <div class="news-grid">
+      <div class="news-card lead">
+        <div class="nc-kicker kicker-swc" data-t="k_swc">SWC 2026 · Em Destaque</div>
+        <div class="nc-title" data-t="n1_t">Vizela recebe o Campeonato do Mundo Sénior de Minigolfe em outubro de 2026</div>
+        <div class="nc-text" data-t="n1_d">De 14 a 17 de outubro de 2026, o Campo Municipal "Fonseca e Castro" será o palco do maior evento da história do minigolfe português. Portugal recebe o mundo num campo carregado de história desde 1968.</div>
+        <div class="nc-foot"><span class="nc-date">Setembro 2025</span><span class="nc-arrow">→</span></div>
+      </div>
+      <div class="news-card">
+        <div class="nc-kicker kicker-nat" data-t="k_nat">Campeonato Nacional</div>
+        <div class="nc-title" data-t="n2_t">Vizela recebe 2ª Jornada do Nacional com 86 atletas</div>
+        <div class="nc-text" data-t="n2_d">O Campo Fonseca e Castro voltou a ser o centro do minigolfe nacional nos dias 25 e 26 de abril de 2026. Um ensaio geral para outubro.</div>
+        <div class="nc-foot"><span class="nc-date">27 Abril 2026</span><span class="nc-arrow">→</span></div>
+      </div>
+      <div class="news-card">
+        <div class="nc-kicker kicker-nat" data-t="k_nat">Seleção Nacional</div>
+        <div class="nc-title" data-t="n3_t">Seleção Sénior portuguesa confirmada para o SWC 2026</div>
+        <div class="nc-text" data-t="n3_d">Os atletas qualificados no Nacional de 2025 estão definidos. 11 atletas, homens e mulheres, prontos para representar Portugal em casa.</div>
+        <div class="nc-foot"><span class="nc-date">Setembro 2025</span><span class="nc-arrow">→</span></div>
+      </div>
+      <div class="news-card">
+        <div class="nc-kicker kicker-loc" data-t="k_loc">Local</div>
+        <div class="nc-title" data-t="n4_t">Academia Vizelgolfe — a nova geração cresce</div>
+        <div class="nc-text" data-t="n4_d">A Academia Vizelgolfe continua a formar jovens atletas, garantindo o futuro do minigolfe em Vizela para as próximas décadas.</div>
+        <div class="nc-foot"><span class="nc-date">2026</span><span class="nc-arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SWC 2026 -->
+<section class="swc-sec" id="swc">
+  <div class="page" style="position:relative;z-index:1;">
+    <span class="section-kicker" data-t="s_swc_k">SWC 2026 · Vizela · Portugal</span>
+    <h2 class="section-title" data-t="s_swc_t">O Mundo vem a <em>Vizela</em></h2>
+    <p class="section-lead" data-t="s_swc_l">O maior evento alguma vez realizado em Vizela. 55 anos depois do primeiro Europeu, Portugal recebe o Campeonato do Mundo Sénior de Minigolfe.</p>
+    <div class="swc-layout">
+      <div class="swc-facts">
+        <div class="sf"><div class="sf-label" data-t="sf_dates">Datas</div><div class="sf-val"><strong>14 — 17 Outubro 2026</strong></div></div>
+        <div class="sf"><div class="sf-label" data-t="sf_local">Local</div><div class="sf-val" data-t="sf_local_v">Campo Municipal "Fonseca e Castro", Parque das Termas, Vizela</div></div>
+        <div class="sf"><div class="sf-label" data-t="sf_disc">Disciplinas</div><div class="sf-val" data-t="sf_disc_v">Minigolfe + Petergolfe — 18 pistas cada, homologadas WMF</div></div>
+        <div class="sf"><div class="sf-label" data-t="sf_form">Formato</div><div class="sf-val" data-t="sf_form_v">Competição por equipas nacionais — categoria Sénior</div></div>
+        <div class="sf"><div class="sf-label" data-t="sf_org">Organização</div><div class="sf-val" data-t="sf_org_v">European Minigolf Sport Federation (EMF) com apoio da Câmara Municipal de Vizela</div></div>
+        <div class="sf"><div class="sf-label" data-t="sf_site">Site Oficial</div><div class="sf-val"><a href="https://swc2026-vizela.pt/" target="_blank" rel="noopener" style="color:var(--gold2);text-decoration:none;">swc2026-vizela.pt →</a></div></div>
+      </div>
+      <div class="team-block">
+        <div class="team-kicker" data-t="team_k">Seleção Portuguesa SWC 2026</div>
+        <div class="team-grid">
+          <div class="athlete"><div class="ath-init init-m">JF</div><div><div class="ath-name">João Ferreira</div><div class="ath-cat" data-t="cat_m">Sénior Masculino</div></div></div>
+          <div class="athlete"><div class="ath-init init-m">AS</div><div><div class="ath-name">André Silva</div><div class="ath-cat" data-t="cat_m">Sénior Masculino</div></div></div>
+          <div class="athlete"><div class="ath-init init-m">DS</div><div><div class="ath-name">Domingos Silva</div><div class="ath-cat" data-t="cat_m">Sénior Masculino</div></div></div>
+          <div class="athlete"><div class="ath-init init-m">CF</div><div><div class="ath-name">Carlos Ferreira</div><div class="ath-cat" data-t="cat_m">Sénior Masculino</div></div></div>
+          <div class="athlete"><div class="ath-init init-m">MS</div><div><div class="ath-name">Manuel Simões</div><div class="ath-cat" data-t="cat_m">Sénior Masculino</div></div></div>
+          <div class="athlete"><div class="ath-init init-m">BS</div><div><div class="ath-name">Belarmino Soares</div><div class="ath-cat" data-t="cat_m">Sénior Masculino</div></div></div>
+          <div class="athlete"><div class="ath-init init-m">JF</div><div><div class="ath-name">João Fidalgo</div><div class="ath-cat" data-t="cat_m">Sénior Masculino</div></div></div>
+          <div class="athlete"><div class="ath-init init-f">FC</div><div><div class="ath-name">Fernanda Costa</div><div class="ath-cat" data-t="cat_f">Sénior Feminino</div></div></div>
+          <div class="athlete"><div class="ath-init init-f">JS</div><div><div class="ath-name">Juventina Silva</div><div class="ath-cat" data-t="cat_f">Sénior Feminino</div></div></div>
+          <div class="athlete"><div class="ath-init init-f">FM</div><div><div class="ath-name">Fernanda Manso</div><div class="ath-cat" data-t="cat_f">Sénior Feminino</div></div></div>
+          <div class="athlete"><div class="ath-init init-f">AA</div><div><div class="ath-name">Anunciação Almeida</div><div class="ath-cat" data-t="cat_f">Sénior Feminino</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="hist-sec" id="hist">
+  <div class="page">
+    <span class="section-kicker" data-t="s_hist_k">O berço do minigolfe em Portugal</span>
+    <h2 class="section-title" data-t="s_hist_t">Uma história de <em>mais de 55 anos</em></h2>
+    <div class="hist-layout">
+      <div class="hist-text">
+        <p data-t="hist_p1">Vizela não se tornou o berço do minigolfe em Portugal por acidente. Em 1968, <strong>Fonseca e Castro</strong>, Presidente da Junta de Turismo de Vizela, trouxe as primeiras pistas de minigolfe para Portugal — instaladas no antigo Park Club, junto ao rio Vizela.</p>
+        <p data-t="hist_p2">Em dois anos, a modalidade cresceu extraordinariamente. Em 1970, <strong>Vizela organizou o I Campeonato Nacional</strong>. Em 1971, recebeu o primeiro Europeu em Portugal. Em 2012, acolheu o European Cup com 150 atletas. Em 2016, o Campeonato da Europa e a Nations Cup. <strong>Cinco décadas de história</strong> — sempre Vizela no centro.</p>
+        <p data-t="hist_p3">Em outubro de 2026, o <strong>Campo Municipal "Fonseca e Castro"</strong> — homenagem ao fundador — recebe o Campeonato do Mundo Sénior. O maior palco da história do minigolfe português. O círculo fecha-se de forma gloriosa.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">1968</div>
+          <div class="tl-title" data-t="tl1_t">Nasce o minigolfe em Portugal</div>
+          <div class="tl-desc" data-t="tl1_d">Fonseca e Castro instala as primeiras pistas de minigolfe em Portugal no antigo Park Club de Vizela. Vizela torna-se o berço da modalidade no país.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">1970</div>
+          <div class="tl-title" data-t="tl2_t">I Campeonato Nacional de Minigolfe</div>
+          <div class="tl-desc" data-t="tl2_d">A 5 e 6 de setembro, Vizela organiza o primeiro Campeonato Nacional, com atletas do Porto e de Vizela.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">1971</div>
+          <div class="tl-title" data-t="tl3_t">IX Campeonato da Europa — primeiro em Portugal</div>
+          <div class="tl-desc" data-t="tl3_d">Vizela e Porto organizam o IX Europeu de Minigolfe, o primeiro em solo português. Participam Alemanha, Suécia, Dinamarca, Holanda, Itália, Suíça e Portugal.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2012</div>
+          <div class="tl-title" data-t="tl4_t">European Cup — 150 atletas europeus</div>
+          <div class="tl-desc" data-t="tl4_d">Vizela recebe o Minigolf European Cup com 150 atletas de toda a Europa durante cerca de duas semanas no Campo Fonseca e Castro.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2016</div>
+          <div class="tl-title" data-t="tl5_t">Campeonato da Europa + Nations Cup</div>
+          <div class="tl-desc" data-t="tl5_d">O Vizela Minigolf Open 2016 reúne a Nations Cup em maio e o Campeonato da Europa em agosto.</div>
+        </div>
+        <div class="tl-item gold-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2026</div>
+          <div class="tl-title" data-t="tl6_t">Campeonato do Mundo Sénior — SWC 2026</div>
+          <div class="tl-desc" data-t="tl6_d">O maior passo da história. 58 anos depois de tudo começar em Vizela, o mundo inteiro vem ao Campo Fonseca e Castro.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTRIES -->
+<section class="countries-sec" id="countries">
+  <div class="page" style="position:relative;z-index:1;">
+    <span class="section-kicker" data-t="s_ctry_k">Último SWC · Países participantes</span>
+    <h2 class="section-title" data-t="s_ctry_t">O Mundo do <em>Minigolfe Sénior</em></h2>
+    <p class="section-lead" data-t="s_ctry_l">Estes países estiveram representados no último Campeonato do Mundo Sénior. Em 2026, regressam a Vizela — e poderão juntar-se outros.</p>
+    <div class="countries-grid">
+      <div class="country"><span class="c-flag">🇦🇹</span><div class="c-name">Áustria</div></div>
+      <div class="country"><span class="c-flag">🇸🇪</span><div class="c-name">Suécia</div></div>
+      <div class="country"><span class="c-flag">🇩🇪</span><div class="c-name">Alemanha</div></div>
+      <div class="country"><span class="c-flag">🇮🇹</span><div class="c-name">Itália</div></div>
+      <div class="country"><span class="c-flag">🇸🇰</span><div class="c-name">Eslováquia</div></div>
+      <div class="country"><span class="c-flag">🇨🇿</span><div class="c-name">Chéquia</div></div>
+      <div class="country"><span class="c-flag">🇨🇭</span><div class="c-name">Suíça</div></div>
+      <div class="country"><span class="c-flag">🇫🇮</span><div class="c-name">Finlândia</div></div>
+      <div class="country"><span class="c-flag">🇳🇱</span><div class="c-name">Países Baixos</div></div>
+      <div class="country"><span class="c-flag">🇧🇪</span><div class="c-name">Bélgica</div></div>
+      <div class="country"><span class="c-flag">🇫🇷</span><div class="c-name">França</div></div>
+      <div class="country"><span class="c-flag">🇵🇹</span><div class="c-name">Portugal</div></div>
+      <div class="country"><span class="c-flag">🇱🇻</span><div class="c-name">Letónia</div></div>
+      <div class="country"><span class="c-flag">🇨🇳</span><div class="c-name">China</div></div>
+      <div class="c-note" data-t="ctry_note">Lista baseada no último SWC. Inscrições para 2026 abertas — poderão participar países adicionais.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIZELA -->
+<section class="vizela-sec" id="vizela">
+  <div class="page">
+    <span class="section-kicker" data-t="s_viz_k">A cidade anfitriã</span>
+    <h2 class="section-title" data-t="s_viz_t">Vizela — <em>Rainha das Termas</em></h2>
+    <div class="vizela-layout">
+      <div class="vizela-text">
+        <p data-t="viz_p1">Vizela é uma cidade que <strong>surpreende quem a visita</strong>. Encravada num vale verde entre Guimarães e Felgueiras, no coração do norte de Portugal, é conhecida pelas suas termas milenares — as águas sulfurosas que os Romanos já aproveitavam há dois mil anos.</p>
+        <p data-t="viz_p2">O <strong>Campo Municipal "Fonseca e Castro"</strong> situa-se no Parque das Termas, rodeado de árvores centenárias e a poucos metros do rio Vizela. Um palco único no mundo do minigolfe — com história, natureza e uma cidade inteira por trás.</p>
+        <p data-t="viz_p3">A <strong>proximidade a Guimarães</strong> — berço de Portugal, Património Mundial da UNESCO — e ao Aeroporto Internacional Francisco Sá Carneiro do Porto tornam Vizela um destino acessível e inesquecível para os atletas internacionais que chegam em outubro.</p>
+      </div>
+      <div class="vizela-facts">
+        <div class="vf">
+          <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+          <div><div class="vf-title" data-t="vf1_t">Parque das Termas · Campo Fonseca e Castro</div><div class="vf-desc" data-t="vf1_d">6.800 m², 18 pistas Mini + 18 pistas Peter, homologadas WMF para competição internacional.</div></div>
+        </div>
+        <div class="vf">
+          <div class="vf-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><div class="vf-title" data-t="vf2_t">Guimarães — 15 minutos</div><div class="vf-desc" data-t="vf2_d">Berço de Portugal e Património Mundial da UNESCO. Visita obrigatória para atletas internacionais.</div></div>
+        </div>
+        <div class="vf">
+          <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <div><div class="vf-title" data-t="vf3_t">Aeroporto do Porto — 40 minutos</div><div class="vf-desc" data-t="vf3_d">Francisco Sá Carneiro com ligações diretas para toda a Europa e mundo.</div></div>
+        </div>
+        <div class="vf">
+          <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+          <div><div class="vf-title" data-t="vf4_t">Alojamento</div><div class="vf-desc" data-t="vf4_d">Hotel das Termas de Vizela, unidades locais e oferta alargada em Guimarães e Braga.</div></div>
+        </div>
+        <div class="vf">
+          <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+          <div><div class="vf-title" data-t="vf5_t">Gastronomia do Minho</div><div class="vf-desc" data-t="vf5_d">Cozinha minhota, caldo verde, bacalhau, rojões e vinho verde. Uma experiência gastronómica autêntica.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-sec" id="gallery">
+  <div class="page">
+    <span class="section-kicker" data-t="s_gal_k">Galeria</span>
+    <h2 class="section-title" data-t="s_gal_t">Imagens do <em>Minigolfe em Vizela</em></h2>
+    <p class="section-lead" data-t="s_gal_l">A galeria cresce com o tempo — fotografias do campo, dos atletas, das competições e da cidade de Vizela.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://img.youtube.com/vi/1QHeRhyLy6g/maxresdefault.jpg" alt="WMF World Championships 2019" loading="lazy">
+        <div class="gallery-caption" data-t="gal1">WMF World Championships 2019</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://img.youtube.com/vi/sNOPNcMESA0/maxresdefault.jpg" alt="WMF World Championships 2015" loading="lazy">
+        <div class="gallery-caption" data-t="gal2">WMF World Championships 2015 — Lahti</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://img.youtube.com/vi/w2QjfL3ClO8/maxresdefault.jpg" alt="WMF World Championships 2011" loading="lazy">
+        <div class="gallery-caption" data-t="gal3">WMF World Championships 2011 — Estocolmo</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg class="gp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <div class="gp-text" data-t="gal_ph1">Campo Fonseca e Castro</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg class="gp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <div class="gp-text" data-t="gal_ph2">SWC 2026 · Em breve</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIARY -->
+<section class="diary-sec" id="diary">
+  <div class="page">
+    <span class="section-kicker" data-t="s_diary_k">Diário · O caminho para outubro</span>
+    <h2 class="section-title" data-t="s_diary_t">O que está a <em>acontecer</em></h2>
+    <p class="section-lead" data-t="s_diary_l">Registo cronológico do caminho de Vizela e do minigolfe português rumo ao SWC 2026.</p>
+    <div class="diary-list">
+      <div class="diary-item">
+        <div class="di-date"><div class="di-day">27</div><div class="di-month">Abr 2026</div></div>
+        <div class="di-body">
+          <div class="di-tag tag-nat" data-t="tag_nat">Nacional</div>
+          <div class="di-title" data-t="d1_t">2ª Jornada do Nacional em Vizela — 86 atletas</div>
+          <div class="di-text" data-t="d1_d">O Campo Fonseca e Castro recebeu a segunda jornada do Campeonato Nacional Individual com 86 atletas. Campo em excelentes condições para outubro.</div>
+        </div>
+      </div>
+      <div class="diary-item">
+        <div class="di-date"><div class="di-day">16</div><div class="di-month">Mai 2026</div></div>
+        <div class="di-body">
+          <div class="di-tag tag-nat" data-t="tag_nat">Nacional</div>
+          <div class="di-title" data-t="d2_t">Campeonato Nacional de Clubes — Porto</div>
+          <div class="di-text" data-t="d2_d">A Vizelgolfe e os atletas seniores da seleção portuguesa em competição no Porto. Mais um passo na preparação para o Mundial de outubro.</div>
+        </div>
+      </div>
+      <div class="diary-item">
+        <div class="di-date"><div class="di-day">6</div><div class="di-month">Jun 2026</div></div>
+        <div class="di-body">
+          <div class="di-tag tag-nat" data-t="tag_nat">Nacional</div>
+          <div class="di-title" data-t="d3_t">3ª Jornada Nacional — Lamego</div>
+          <div class="di-text" data-t="d3_d">A jornada decisiva do Campeonato Nacional Individual. A seleção sénior portuguesa para o SWC 2026 toma a sua forma final em Lamego.</div>
+        </div>
+      </div>
+      <div class="diary-item swc-entry">
+        <div class="di-date"><div class="di-day">14</div><div class="di-month">Out 2026</div></div>
+        <div class="di-body">
+          <div class="di-tag tag-swc" data-t="tag_swc">SWC 2026</div>
+          <div class="di-title" data-t="d4_t">Começa o Campeonato do Mundo Sénior em Vizela</div>
+          <div class="di-text" data-t="d4_d">O dia que Vizela esperou 55 anos. As equipas nacionais entram no Campo Fonseca e Castro. O mundo do minigolfe sénior tem uma capital: Vizela, Portugal.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section class="links-sec" id="links">
+  <div class="page">
+    <span class="section-kicker" data-t="s_links_k">Federações e links oficiais</span>
+    <h2 class="section-title" data-t="s_links_t">O Mundo <em>oficial</em> do Minigolfe</h2>
+    <div class="links-grid">
+      <a class="link-card" href="https://swc2026-vizela.pt/" target="_blank" rel="noopener">
+        <div class="lc-type" data-t="lc1_type">Site Oficial</div>
+        <div class="lc-name" data-t="lc1_name">SWC 2026 Vizela</div>
+        <div class="lc-desc" data-t="lc1_desc">Site oficial do Campeonato do Mundo Sénior de Minigolfe 2026 em Vizela.</div>
+        <div class="lc-url">swc2026-vizela.pt</div>
+        <div class="lc-arrow">→</div>
+      </a>
+      <a class="link-card" href="http://www.fp-minigolfe.com/" target="_blank" rel="noopener">
+        <div class="lc-type" data-t="lc2_type">Federação Nacional</div>
+        <div class="lc-name" data-t="lc2_name">FPM — Federação Portuguesa de Minigolfe</div>
+        <div class="lc-desc" data-t="lc2_desc">A federação que representa o minigolfe português a nível nacional e internacional.</div>
+        <div class="lc-url">fp-minigolfe.com</div>
+        <div class="lc-arrow">→</div>
+      </a>
+      <a class="link-card" href="https://www.minigolf-europe.org/" target="_blank" rel="noopener">
+        <div class="lc-type" data-t="lc3_type">Federação Europeia</div>
+        <div class="lc-name" data-t="lc3_name">EMF — European Minigolf Sport Federation</div>
+        <div class="lc-desc" data-t="lc3_desc">Organiza os Campeonatos Europeus e o Campeonato do Mundo Sénior — incluindo o SWC 2026.</div>
+        <div class="lc-url">minigolf-europe.org</div>
+        <div class="lc-arrow">→</div>
+      </a>
+      <a class="link-card" href="https://gov.minigolfsport.com/" target="_blank" rel="noopener">
+        <div class="lc-type" data-t="lc4_type">Federação Mundial</div>
+        <div class="lc-name" data-t="lc4_name">WMF — World Minigolf Sport Federation</div>
+        <div class="lc-desc" data-t="lc4_desc">A organização mundial que representa 65 federações nacionais em todos os continentes.</div>
+        <div class="lc-url">gov.minigolfsport.com</div>
+        <div class="lc-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="page">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="fb-name">Vizela<span class="sep"> · </span>Minigolf<span class="sep"> · </span><span class="world">World</span></div>
+        <div class="fb-desc" data-t="fb_desc">Portal independente dedicado ao minigolfe em Vizela e no mundo. Berço do minigolfe em Portugal desde 1968. Acompanha o SWC 2026 e tudo o que acontece na modalidade.</div>
+      </div>
+      <div class="footer-note">
+        <span class="fn-label" data-t="fn_label">Nota editorial</span>
+        <div class="fn-text" data-t="fn_text">Este é um portal independente e apaixonado, não afiliado com qualquer federação, clube ou organização oficial. Não representa a Vizelgolfe, a FPM, a EMF, a WMF, nem o comité organizador do SWC 2026.</div>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <div class="fc-left">© 2026 <strong>Rui Gonçalves</strong> — Todos os direitos reservados · <span data-t="fc_domain">vizelaminigolfeworld.com</span></div>
+      <div class="fc-right" data-t="fc_right">Vizela · Portugal</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load',()=>{document.getElementById('heroBg').classList.add('loaded');});
+function tick(){
+  const t=new Date('2026-10-14T09:00:00'),n=new Date(),d=t-n;
+  if(d<=0)return;
+  document.getElementById('cd-d').textContent=Math.floor(d/86400000);
+  document.getElementById('cd-h').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+function go(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+function goTop(){window.scrollTo({top:0,behavior:'smooth'});}
+
+// SCROLL PROGRESS BAR
+const _bar=document.createElement('div');
+_bar.style.cssText='position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,#1a3a6b,#e8b04a);z-index:9999;width:0;pointer-events:none;transition:width 0.15s;';
+document.body.appendChild(_bar);
+
+// BACK TO TOP
+const _top=document.createElement('button');
+_top.innerHTML='↑';
+_top.title='Voltar ao topo';
+_top.style.cssText='position:fixed;bottom:28px;right:28px;width:44px;height:44px;background:rgba(13,26,56,0.92);border:1px solid rgba(232,176,74,0.35);color:rgba(232,176,74,0.85);font-size:20px;cursor:pointer;z-index:400;opacity:0;transition:opacity 0.3s,transform 0.3s;transform:translateY(12px);font-family:serif;backdrop-filter:blur(8px);';
+_top.onclick=goTop;
+document.body.appendChild(_top);
+
+// ACTIVE SECTION TRACKING
+const _secs=['news','swc','hist','countries','vizela','gallery','diary','links'];
+const _navMap={news:'nav_news',swc:'nav_swc',hist:'nav_hist',vizela:'nav_vizela',gallery:'nav_gallery',links:'nav_links'};
+
+window.addEventListener('scroll',()=>{
+  const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  _bar.style.width=Math.min(100,pct)+'%';
+  if(window.scrollY>500){_top.style.opacity='1';_top.style.transform='translateY(0)';}
+  else{_top.style.opacity='0';_top.style.transform='translateY(12px)';}
+  let cur='';
+  _secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=100)cur=id;});
+  document.querySelectorAll('.nb').forEach(b=>{b.style.color='';b.style.borderBottom='2px solid transparent';});
+  if(_navMap[cur]){const a=document.querySelector(`.nb[data-t="${_navMap[cur]}"]`);if(a){a.style.color='#e8b04a';a.style.borderBottom='2px solid #e8b04a';}}
+},{passive:true});
+const T={
+pt:{logo_sub:'Portal Independente do Minigolfe',nav_news:'Notícias',nav_swc:'SWC 2026',nav_hist:'História',nav_vizela:'Vizela',nav_gallery:'Galeria',nav_links:'Federações',hero_kicker:'Vizela · Portugal · Berço do Minigolfe · Desde 1968',hero_tagline:'Uma cidade. Uma paixão. Uma história de mais de 55 anos.<br>Vizela e o minigolfe — dois nomes que o mundo passou a conhecer juntos.',swc_kicker:'Em destaque · SWC 2026',swc_name:'Campeonato do Mundo Sénior · Vizela',cd_d:'dias',cd_h:'horas',cd_m:'min',cd_s:'seg',band1:'Fundação em Vizela',band2:'Anos de história',band3:'Eventos internacionais',band4:'Países SWC anterior',band5:'Outubro 2026',s_news_k:'Últimas notícias',s_news_t:'O que está a <em>acontecer</em>',k_swc:'SWC 2026 · Em Destaque',k_nat:'Campeonato Nacional',k_loc:'Local',k_int:'Internacional',n1_t:'Vizela recebe o Campeonato do Mundo Sénior de Minigolfe em outubro de 2026',n1_d:'De 14 a 17 de outubro de 2026, o Campo Municipal "Fonseca e Castro" será o palco do maior evento da história do minigolfe português.',n2_t:'Vizela recebe 2ª Jornada do Nacional com 86 atletas',n2_d:'O Campo Fonseca e Castro voltou a ser o centro do minigolfe nacional nos dias 25 e 26 de abril de 2026.',n3_t:'Seleção Sénior portuguesa confirmada para o SWC 2026',n3_d:'Os atletas qualificados no Nacional de 2025 estão definidos. 11 atletas prontos para representar Portugal em casa.',n4_t:'Academia Vizelgolfe — a nova geração cresce',n4_d:'A Academia Vizelgolfe continua a formar jovens atletas, garantindo o futuro do minigolfe em Vizela.',s_swc_k:'SWC 2026 · Vizela · Portugal',s_swc_t:'O Mundo vem a <em>Vizela</em>',s_swc_l:'O maior evento alguma vez realizado em Vizela. 55 anos depois do primeiro Europeu, Portugal recebe o Campeonato do Mundo Sénior.',sf_dates:'Datas',sf_local:'Local',sf_local_v:'Campo Municipal "Fonseca e Castro", Parque das Termas, Vizela',sf_disc:'Disciplinas',sf_disc_v:'Minigolfe + Petergolfe — 18 pistas cada, homologadas WMF',sf_form:'Formato',sf_form_v:'Competição por equipas nacionais — categoria Sénior',sf_org:'Organização',sf_org_v:'European Minigolf Sport Federation (EMF) com apoio da Câmara Municipal de Vizela',sf_site:'Site Oficial',team_k:'Seleção Portuguesa SWC 2026',cat_m:'Sénior Masculino',cat_f:'Sénior Feminino',s_hist_k:'O berço do minigolfe em Portugal',s_hist_t:'Uma história de <em>mais de 55 anos</em>',hist_p1:'Vizela não se tornou o berço do minigolfe em Portugal por acidente. Em 1968, <strong>Fonseca e Castro</strong> trouxe as primeiras pistas para Portugal.',hist_p2:'Em 1970, <strong>Vizela organizou o I Campeonato Nacional</strong>. Em 1971, o primeiro Europeu. Em 2012, o European Cup. Em 2016, o Europeu e Nations Cup.',hist_p3:'Em 2026, o <strong>Campo Fonseca e Castro</strong> recebe o Campeonato do Mundo Sénior. O círculo fecha-se gloriosamente.',tl1_t:'Nasce o minigolfe em Portugal',tl1_d:'Fonseca e Castro instala as primeiras pistas no antigo Park Club de Vizela.',tl2_t:'I Campeonato Nacional',tl2_d:'Vizela organiza o primeiro Nacional com atletas do Porto e de Vizela.',tl3_t:'IX Europeu — primeiro em Portugal',tl3_d:'Com Alemanha, Suécia, Dinamarca, Holanda, Itália, Suíça e Portugal.',tl4_t:'European Cup — 150 atletas europeus',tl4_d:'150 atletas de toda a Europa durante duas semanas no Campo Fonseca e Castro.',tl5_t:'Campeonato da Europa + Nations Cup',tl5_d:'Nations Cup em maio e Europeu em agosto — Vizela de volta à elite europeia.',tl6_t:'SWC 2026 — Campeonato do Mundo Sénior',tl6_d:'58 anos depois de tudo começar, o mundo inteiro vem a Vizela.',s_ctry_k:'Último SWC · Países participantes',s_ctry_t:'O Mundo do <em>Minigolfe Sénior</em>',s_ctry_l:'Estes países estiveram no último SWC. Em 2026 regressam a Vizela.',ctry_note:'Lista baseada no último SWC. Inscrições para 2026 abertas.',s_viz_k:'A cidade anfitriã',s_viz_t:'Vizela — <em>Rainha das Termas</em>',viz_p1:'Vizela é uma cidade que <strong>surpreende quem a visita</strong>, encravada num vale verde entre Guimarães e Felgueiras.',viz_p2:'O <strong>Campo "Fonseca e Castro"</strong> no Parque das Termas, rodeado de árvores centenárias e o rio Vizela.',viz_p3:'A <strong>proximidade a Guimarães</strong> — berço de Portugal e Património UNESCO — e ao Aeroporto do Porto.',vf1_t:'Parque das Termas · Campo Fonseca e Castro',vf1_d:'6.800 m², 18 pistas Mini + 18 pistas Peter, homologadas WMF.',vf2_t:'Guimarães — 15 minutos',vf2_d:'Berço de Portugal e Património Mundial da UNESCO.',vf3_t:'Aeroporto do Porto — 40 minutos',vf3_d:'Ligações diretas para toda a Europa.',vf4_t:'Alojamento',vf4_d:'Hotel das Termas e opções em Guimarães e Braga.',vf5_t:'Gastronomia do Minho',vf5_d:'Cozinha minhota, bacalhau, rojões e vinho verde.',s_gal_k:'Galeria',s_gal_t:'Imagens do <em>Minigolfe em Vizela</em>',s_gal_l:'A galeria cresce com o tempo — fotografias do campo, atletas e competições.',gal1:'WMF World Championships 2019',gal2:'WMF World Championships 2015',gal3:'WMF World Championships 2011',gal_ph1:'Campo Fonseca e Castro',gal_ph2:'SWC 2026 · Em breve',s_diary_k:'Diário · O caminho para outubro',s_diary_t:'O que está a <em>acontecer</em>',s_diary_l:'Registo do caminho rumo ao SWC 2026.',tag_nat:'Nacional',tag_swc:'SWC 2026',d1_t:'2ª Jornada do Nacional em Vizela — 86 atletas',d1_d:'O Campo Fonseca e Castro recebeu 86 atletas. Excelente ensaio para outubro.',d2_t:'Campeonato Nacional de Clubes — Porto',d2_d:'Vizelgolfe e atletas seniores em competição no Porto.',d3_t:'3ª Jornada Nacional — Lamego',d3_d:'Jornada decisiva. A seleção sénior para o SWC 2026 toma forma final.',d4_t:'Começa o SWC 2026 em Vizela',d4_d:'O dia que Vizela esperou 55 anos. O mundo entra no Campo Fonseca e Castro.',s_links_k:'Federações e links oficiais',s_links_t:'O Mundo <em>oficial</em> do Minigolfe',lc1_type:'Site Oficial',lc1_name:'SWC 2026 Vizela',lc1_desc:'Site oficial do Campeonato do Mundo Sénior 2026.',lc2_type:'Federação Nacional',lc2_name:'FPM — Federação Portuguesa de Minigolfe',lc2_desc:'A federação que representa o minigolfe português.',lc3_type:'Federação Europeia',lc3_name:'EMF — European Minigolf Sport Federation',lc3_desc:'Organiza os Europeus e o SWC.',lc4_type:'Federação Mundial',lc4_name:'WMF — World Minigolf Sport Federation',lc4_desc:'65 federações nacionais em todos os continentes.',fb_desc:'Portal independente do minigolfe em Vizela e no mundo. Berço do minigolfe em Portugal desde 1968.',fn_label:'Nota editorial',fn_text:'Portal independente não afiliado com qualquer federação ou organização oficial.',fc_domain:'vizelaminigolfeworld.com',fc_right:'Vizela · Portugal'},
+en:{logo_sub:'Independent Minigolf Portal',nav_news:'News',nav_swc:'SWC 2026',nav_hist:'History',nav_vizela:'Vizela',nav_gallery:'Gallery',nav_links:'Federations',hero_kicker:'Vizela · Portugal · Birthplace of Minigolf · Since 1968',hero_tagline:'A city. A passion. A history of over 55 years.<br>Vizela and minigolf — two names the world came to know together.',swc_kicker:'Featured · SWC 2026',swc_name:'Senior World Championship · Vizela',cd_d:'days',cd_h:'hours',cd_m:'min',cd_s:'sec',band1:'Founded in Vizela',band2:'Years of history',band3:'International events',band4:'Countries last SWC',band5:'October 2026',s_news_k:'Latest news',s_news_t:'What is <em>happening</em>',k_swc:'SWC 2026 · Featured',k_nat:'National Championship',k_loc:'Local',k_int:'International',n1_t:'Vizela hosts the Senior Minigolf World Championship in October 2026',n1_d:'From 14 to 17 October 2026, the "Fonseca e Castro" Course will host the greatest event in Portuguese minigolf history.',n2_t:'Vizela hosts 2nd National Round with 86 athletes',n2_d:'The Fonseca e Castro Course was the centre of national minigolf on 25–26 April 2026.',n3_t:'Portuguese Senior Team confirmed for SWC 2026',n3_d:'11 athletes ready to represent Portugal at home.',n4_t:'Academia Vizelgolfe — the next generation grows',n4_d:'Academia Vizelgolfe continues training young athletes.',s_swc_k:'SWC 2026 · Vizela · Portugal',s_swc_t:'The World comes to <em>Vizela</em>',s_swc_l:'The greatest event ever held in Vizela. 55 years after the first European Championship, Portugal hosts the Senior World Championship.',sf_dates:'Dates',sf_local:'Venue',sf_local_v:'"Fonseca e Castro" Course, Thermal Park, Vizela',sf_disc:'Disciplines',sf_disc_v:'Minigolf + Petergolf — 18 holes each, WMF approved',sf_form:'Format',sf_form_v:'National team competition — Senior category',sf_org:'Organisation',sf_org_v:'EMF with support from Vizela Municipal Council',sf_site:'Official Website',team_k:'Portuguese Team SWC 2026',cat_m:'Senior Men',cat_f:'Senior Women',s_hist_k:'Birthplace of minigolf in Portugal',s_hist_t:'A history of <em>over 55 years</em>',hist_p1:'In 1968, <strong>Fonseca e Castro</strong> brought the first minigolf course to Portugal in Vizela.',hist_p2:'1970: first National Championship. 1971: first European on Portuguese soil. 2012: European Cup. 2016: European Championship and Nations Cup.',hist_p3:'In 2026, the <strong>Fonseca e Castro Course</strong> hosts the Senior World Championship.',tl1_t:'Minigolf is born in Portugal',tl1_d:'Fonseca e Castro installs the first minigolf course at the old Park Club in Vizela.',tl2_t:'1st National Championship',tl2_d:'Vizela organises the first National Championship.',tl3_t:'IX European — first in Portugal',tl3_d:'With Germany, Sweden, Denmark, Netherlands, Italy, Switzerland and Portugal.',tl4_t:'European Cup — 150 European athletes',tl4_d:'150 athletes from across Europe for two weeks at Fonseca e Castro.',tl5_t:'European Championship + Nations Cup',tl5_d:'Nations Cup in May and European Championship in August 2016.',tl6_t:'SWC 2026 — Senior World Championship',tl6_d:'58 years after it all began, the entire world comes to Vizela.',s_ctry_k:'Last SWC · Participating countries',s_ctry_t:'The World of <em>Senior Minigolf</em>',s_ctry_l:'These countries participated in the last SWC. In 2026 they return to Vizela.',ctry_note:'Based on the last SWC. Registrations for 2026 open — more countries may join.',s_viz_k:'The host city',s_viz_t:'Vizela — <em>Queen of the Spas</em>',viz_p1:'Vizela is a city that <strong>surprises its visitors</strong>, nestled in a green valley in northern Portugal.',viz_p2:'The <strong>"Fonseca e Castro" Course</strong> in the Thermal Park, surrounded by century-old trees and the Vizela river.',viz_p3:'<strong>15 minutes from Guimarães</strong> — UNESCO World Heritage — and 40 minutes from Porto Airport.',vf1_t:'Thermal Park · Fonseca e Castro Course',vf1_d:'6,800 m², 18 Mini + 18 Peter holes, WMF approved.',vf2_t:'Guimarães — 15 minutes',vf2_d:'Birthplace of Portugal and UNESCO World Heritage.',vf3_t:'Porto Airport — 40 minutes',vf3_d:'Direct connections throughout Europe.',vf4_t:'Accommodation',vf4_d:'Thermal Hotel and options in Guimarães and Braga.',vf5_t:'Minho Gastronomy',vf5_d:'Traditional cuisine, codfish, vinho verde.',s_gal_k:'Gallery',s_gal_t:'Images of <em>Minigolf in Vizela</em>',s_gal_l:'The gallery grows over time.',gal1:'WMF World Championships 2019',gal2:'WMF World Championships 2015',gal3:'WMF World Championships 2011',gal_ph1:'Fonseca e Castro Course',gal_ph2:'SWC 2026 · Coming soon',s_diary_k:'Diary · The road to October',s_diary_t:'What is <em>happening</em>',s_diary_l:'Chronological record of the road to SWC 2026.',tag_nat:'National',tag_swc:'SWC 2026',d1_t:'2nd National Round in Vizela — 86 athletes',d1_d:'The Fonseca e Castro Course hosted 86 athletes.',d2_t:'National Club Championship — Porto',d2_d:'Vizelgolfe and senior athletes compete in Porto.',d3_t:'3rd National Round — Lamego',d3_d:'The decisive round. Portuguese senior team takes final shape.',d4_t:'SWC 2026 begins in Vizela',d4_d:'The day Vizela waited 55 years for. The world arrives.',s_links_k:'Federations and official links',s_links_t:'The <em>official world</em> of Minigolf',lc1_type:'Official Website',lc1_name:'SWC 2026 Vizela',lc1_desc:'Official website of the 2026 Senior World Championship.',lc2_type:'National Federation',lc2_name:'FPM — Portuguese Minigolf Federation',lc2_desc:'The federation representing Portuguese minigolf.',lc3_type:'European Federation',lc3_name:'EMF — European Minigolf Sport Federation',lc3_desc:'Organises European Championships and the SWC.',lc4_type:'World Federation',lc4_name:'WMF — World Minigolf Sport Federation',lc4_desc:'65 national federations across all continents.',fb_desc:'Independent portal for minigolf in Vizela and worldwide. Birthplace of minigolf in Portugal since 1968.',fn_label:'Editorial note',fn_text:'Independent portal not affiliated with any official federation or organisation.',fc_domain:'vizelaminigolfeworld.com',fc_right:'Vizela · Portugal'},
+es:{logo_sub:'Portal Independiente del Minigolf',nav_news:'Noticias',nav_swc:'SWC 2026',nav_hist:'Historia',nav_vizela:'Vizela',nav_gallery:'Galería',nav_links:'Federaciones',hero_kicker:'Vizela · Portugal · Cuna del Minigolf · Desde 1968',hero_tagline:'Una ciudad. Una pasión. Una historia de más de 55 años.<br>Vizela y el minigolf — dos nombres que el mundo aprendió a conocer juntos.',swc_kicker:'Destacado · SWC 2026',swc_name:'Campeonato del Mundo Sénior · Vizela',cd_d:'días',cd_h:'horas',cd_m:'min',cd_s:'seg',band1:'Fundación en Vizela',band2:'Años de historia',band3:'Eventos internacionales',band4:'Países último SWC',band5:'Octubre 2026',s_news_k:'Últimas noticias',s_news_t:'Lo que está <em>ocurriendo</em>',k_swc:'SWC 2026 · Destacado',k_nat:'Campeonato Nacional',k_loc:'Local',k_int:'Internacional',n1_t:'Vizela acoge el Campeonato del Mundo Sénior de Minigolf en octubre de 2026',n1_d:'Del 14 al 17 de octubre de 2026, el Campo "Fonseca e Castro" será el escenario del mayor evento del minigolf portugués.',n2_t:'Vizela acoge la 2ª Jornada del Nacional con 86 atletas',n2_d:'El Campo Fonseca e Castro fue centro del minigolf nacional los días 25 y 26 de abril.',n3_t:'Selección Sénior portuguesa confirmada para el SWC 2026',n3_d:'11 atletas listos para representar a Portugal en casa.',n4_t:'Academia Vizelgolfe — la nueva generación crece',n4_d:'La Academia Vizelgolfe sigue formando jóvenes atletas.',s_swc_k:'SWC 2026 · Vizela · Portugal',s_swc_t:'El Mundo viene a <em>Vizela</em>',s_swc_l:'El mayor evento jamás celebrado en Vizela. 55 años después del primer Europeo, Portugal acoge el Mundial Sénior.',sf_dates:'Fechas',sf_local:'Sede',sf_local_v:'Campo "Fonseca e Castro", Parque Termal, Vizela',sf_disc:'Disciplinas',sf_disc_v:'Minigolf + Petergolf — 18 hoyos cada uno, WMF',sf_form:'Formato',sf_form_v:'Competición por equipos nacionales — Sénior',sf_org:'Organización',sf_org_v:'EMF con apoyo del Ayuntamiento de Vizela',sf_site:'Sitio Oficial',team_k:'Selección Portuguesa SWC 2026',cat_m:'Sénior Masculino',cat_f:'Sénior Femenino',s_hist_k:'La cuna del minigolf en Portugal',s_hist_t:'Una historia de <em>más de 55 años</em>',hist_p1:'En 1968, <strong>Fonseca e Castro</strong> trajo las primeras pistas de minigolf a Portugal.',hist_p2:'1970: primer Nacional. 1971: primer Europeo. 2012: European Cup. 2016: Europeo y Nations Cup.',hist_p3:'En 2026, el <strong>Campo Fonseca e Castro</strong> acoge el Mundial Sénior.',tl1_t:'Nace el minigolf en Portugal',tl1_d:'Fonseca e Castro instala las primeras pistas en Vizela.',tl2_t:'1er Campeonato Nacional',tl2_d:'Vizela organiza el primer Nacional.',tl3_t:'IX Europeo — primero en Portugal',tl3_d:'Con Alemania, Suecia, Dinamarca, Holanda, Italia, Suiza y Portugal.',tl4_t:'European Cup — 150 atletas europeos',tl4_d:'150 atletas de Europa durante dos semanas en Vizela.',tl5_t:'Europeo + Nations Cup',tl5_d:'Nations Cup en mayo y Europeo en agosto 2016.',tl6_t:'SWC 2026 — Mundial Sénior',tl6_d:'58 años después de todo comenzar, el mundo entero viene a Vizela.',s_ctry_k:'Último SWC · Países',s_ctry_t:'El Mundo del <em>Minigolf Sénior</em>',s_ctry_l:'Estos países participaron en el último SWC. En 2026 regresan a Vizela.',ctry_note:'Basado en el último SWC. Inscripciones 2026 abiertas.',s_viz_k:'La ciudad anfitriona',s_viz_t:'Vizela — <em>Reina de los Balnearios</em>',viz_p1:'Vizela es una ciudad que <strong>sorprende a sus visitantes</strong>, en un valle verde del norte de Portugal.',viz_p2:'El <strong>Campo "Fonseca e Castro"</strong> en el Parque Termal, rodeado de árboles centenarios.',viz_p3:'<strong>15 minutos de Guimarães</strong> — Patrimonio UNESCO — y 40 del Aeropuerto de Oporto.',vf1_t:'Parque Termal · Campo Fonseca e Castro',vf1_d:'6.800 m², 18 Mini + 18 Peter, WMF.',vf2_t:'Guimarães — 15 minutos',vf2_d:'Cuna de Portugal y Patrimonio UNESCO.',vf3_t:'Aeropuerto de Oporto — 40 min',vf3_d:'Conexiones directas con toda Europa.',vf4_t:'Alojamiento',vf4_d:'Hotel Termal y opciones en Guimarães y Braga.',vf5_t:'Gastronomía del Miño',vf5_d:'Cocina minhota, bacalao y vinho verde.',s_gal_k:'Galería',s_gal_t:'Imágenes del <em>Minigolf en Vizela</em>',s_gal_l:'La galería crece con el tiempo.',gal1:'WMF World Championships 2019',gal2:'WMF World Championships 2015',gal3:'WMF World Championships 2011',gal_ph1:'Campo Fonseca e Castro',gal_ph2:'SWC 2026 · Próximamente',s_diary_k:'Diario · El camino hacia octubre',s_diary_t:'Lo que está <em>ocurriendo</em>',s_diary_l:'Registro del camino al SWC 2026.',tag_nat:'Nacional',tag_swc:'SWC 2026',d1_t:'2ª Jornada del Nacional en Vizela — 86 atletas',d1_d:'86 atletas en el Campo Fonseca e Castro.',d2_t:'Nacional de Clubes — Oporto',d2_d:'Vizelgolfe y seniores en Oporto.',d3_t:'3ª Jornada — Lamego',d3_d:'Jornada decisiva. La selección sénior toma forma.',d4_t:'Comienza el SWC 2026 en Vizela',d4_d:'El día que Vizela esperó 55 años.',s_links_k:'Federaciones y enlaces',s_links_t:'El mundo <em>oficial</em> del Minigolf',lc1_type:'Sitio Oficial',lc1_name:'SWC 2026 Vizela',lc1_desc:'Sitio oficial del Mundial Sénior 2026.',lc2_type:'Federación Nacional',lc2_name:'FPM — Federación Portuguesa',lc2_desc:'La federación del minigolf portugués.',lc3_type:'Federación Europea',lc3_name:'EMF — European Minigolf',lc3_desc:'Organiza Europeos y el SWC.',lc4_type:'Federación Mundial',lc4_name:'WMF — World Minigolf',lc4_desc:'65 federaciones en todos los continentes.',fb_desc:'Portal independiente del minigolf en Vizela y el mundo.',fn_label:'Nota editorial',fn_text:'Portal independiente no afiliado con ninguna federación oficial.',fc_domain:'vizelaminigolfeworld.com',fc_right:'Vizela · Portugal'},
+de:{logo_sub:'Unabhängiges Minigolf-Portal',nav_news:'Neuigkeiten',nav_swc:'SWC 2026',nav_hist:'Geschichte',nav_vizela:'Vizela',nav_gallery:'Galerie',nav_links:'Verbände',hero_kicker:'Vizela · Portugal · Wiege des Minigolfs · Seit 1968',hero_tagline:'Eine Stadt. Eine Leidenschaft. Eine Geschichte von über 55 Jahren.<br>Vizela und Minigolf — zwei Namen, die die Welt zusammen kennenlernte.',swc_kicker:'Im Fokus · SWC 2026',swc_name:'Senioren-Weltmeisterschaft · Vizela',cd_d:'Tage',cd_h:'Std.',cd_m:'Min.',cd_s:'Sek.',band1:'Gründung in Vizela',band2:'Jahre Geschichte',band3:'Internationale Events',band4:'Länder letzter SWC',band5:'Oktober 2026',s_news_k:'Neueste Nachrichten',s_news_t:'Was gerade <em>passiert</em>',k_swc:'SWC 2026 · Im Fokus',k_nat:'Nationale Meisterschaft',k_loc:'Lokal',k_int:'International',n1_t:'Vizela empfängt die Senioren-Minigolf-WM im Oktober 2026',n1_d:'Vom 14.–17. Oktober 2026 wird Vizela Welthauptstadt des Senioren-Minigolfs.',n2_t:'Vizela empfängt die 2. Nationale Runde mit 86 Athleten',n2_d:'Am 25.–26. April 2026 war Vizela Zentrum des nationalen Minigolfs.',n3_t:'Portugiesisches Senioren-Team für SWC 2026 bestätigt',n3_d:'11 Athleten bereit, Portugal im eigenen Land zu vertreten.',n4_t:'Academia Vizelgolfe — die nächste Generation wächst',n4_d:'Die Academia bildet weiterhin junge Athleten aus.',s_swc_k:'SWC 2026 · Vizela · Portugal',s_swc_t:'Die Welt kommt nach <em>Vizela</em>',s_swc_l:'Das größte Ereignis in Vizelas Geschichte. 55 Jahre nach der ersten EM empfängt Portugal die Senioren-WM.',sf_dates:'Datum',sf_local:'Austragungsort',sf_local_v:'"Fonseca e Castro" Anlage, Kurpark, Vizela',sf_disc:'Disziplinen',sf_disc_v:'Minigolf + Petergolf — je 18 Bahnen, WMF',sf_form:'Format',sf_form_v:'Mannschaftswettkampf — Senioren',sf_org:'Organisation',sf_org_v:'EMF mit Unterstützung der Stadt Vizela',sf_site:'Offizielle Website',team_k:'Portugiesisches Team SWC 2026',cat_m:'Senioren Männer',cat_f:'Senioren Frauen',s_hist_k:'Wiege des Minigolfs in Portugal',s_hist_t:'Eine Geschichte von <em>über 55 Jahren</em>',hist_p1:'1968 brachte <strong>Fonseca e Castro</strong> die ersten Minigolfbahnen nach Portugal.',hist_p2:'1970: erste Nationale. 1971: erste EM. 2012: European Cup. 2016: EM und Nations Cup.',hist_p3:'2026 empfängt der <strong>Fonseca e Castro Platz</strong> die Senioren-WM.',tl1_t:'Minigolf wird in Portugal geboren',tl1_d:'Fonseca e Castro installiert die ersten Bahnen in Vizela.',tl2_t:'1. Nationale Meisterschaft',tl2_d:'Vizela organisiert die erste Nationale.',tl3_t:'IX. Europameisterschaft — erste in Portugal',tl3_d:'Mit Deutschland, Schweden, Dänemark, Niederlande, Italien, Schweiz und Portugal.',tl4_t:'European Cup — 150 Athleten',tl4_d:'150 europäische Athleten zwei Wochen in Vizela.',tl5_t:'Europameisterschaft + Nations Cup',tl5_d:'Nations Cup im Mai und EM im August 2016.',tl6_t:'SWC 2026 — Senioren-WM',tl6_d:'58 Jahre nach dem Beginn kommt die ganze Welt nach Vizela.',s_ctry_k:'Letzter SWC · Länder',s_ctry_t:'Die Welt des <em>Senioren-Minigolfs</em>',s_ctry_l:'Diese Länder nahmen am letzten SWC teil. 2026 kehren sie nach Vizela zurück.',ctry_note:'Basierend auf dem letzten SWC. Anmeldungen 2026 offen.',s_viz_k:'Die Gastgeberstadt',s_viz_t:'Vizela — <em>Königin der Thermen</em>',viz_p1:'Vizela ist eine Stadt, die <strong>ihre Besucher überrascht</strong>, in einem grünen Tal Nordportugals.',viz_p2:'Der <strong>"Fonseca e Castro" Platz</strong> im Kurpark, umgeben von jahrhundertealten Bäumen.',viz_p3:'<strong>15 Minuten von Guimarães</strong> — UNESCO-Erbe — und 40 vom Flughafen Porto.',vf1_t:'Kurpark · Fonseca e Castro',vf1_d:'6.800 m², 18 Mini + 18 Peter, WMF.',vf2_t:'Guimarães — 15 Minuten',vf2_d:'Wiege Portugals und UNESCO-Erbe.',vf3_t:'Flughafen Porto — 40 Min.',vf3_d:'Direktverbindungen in ganz Europa.',vf4_t:'Unterkunft',vf4_d:'Thermalhotel und Optionen in Guimarães und Braga.',vf5_t:'Minho-Küche',vf5_d:'Traditionelle Küche, Kabeljau, Vinho Verde.',s_gal_k:'Galerie',s_gal_t:'Bilder des <em>Minigolfs in Vizela</em>',s_gal_l:'Die Galerie wächst mit der Zeit.',gal1:'WMF World Championships 2019',gal2:'WMF World Championships 2015',gal3:'WMF World Championships 2011',gal_ph1:'Fonseca e Castro Anlage',gal_ph2:'SWC 2026 · Demnächst',s_diary_k:'Tagebuch · Der Weg zum Oktober',s_diary_t:'Was gerade <em>passiert</em>',s_diary_l:'Protokoll des Weges zum SWC 2026.',tag_nat:'National',tag_swc:'SWC 2026',d1_t:'2. Nationale Runde in Vizela — 86 Athleten',d1_d:'86 Athleten im Fonseca e Castro Course.',d2_t:'Vereinsmeisterschaft — Porto',d2_d:'Vizelgolfe und Senioren-Athleten in Porto.',d3_t:'3. Nationale Runde — Lamego',d3_d:'Die entscheidende Runde.',d4_t:'SWC 2026 beginnt in Vizela',d4_d:'Der Tag, auf den Vizela 55 Jahre gewartet hat.',s_links_k:'Verbände und Links',s_links_t:'Die <em>offizielle Welt</em> des Minigolfs',lc1_type:'Offizielle Website',lc1_name:'SWC 2026 Vizela',lc1_desc:'Offizielle Website der Senioren-WM 2026.',lc2_type:'Nationaler Verband',lc2_name:'FPM — Portugiesischer Verband',lc2_desc:'Der portugiesische Minigolf-Verband.',lc3_type:'Europäischer Verband',lc3_name:'EMF — European Minigolf',lc3_desc:'Organisiert EMs und den SWC.',lc4_type:'Weltverband',lc4_name:'WMF — World Minigolf',lc4_desc:'65 nationale Verbände weltweit.',fb_desc:'Unabhängiges Portal für Minigolf in Vizela und weltweit.',fn_label:'Redaktioneller Hinweis',fn_text:'Unabhängiges Portal ohne Zugehörigkeit zu offiziellen Verbänden.',fc_domain:'vizelaminigolfeworld.com',fc_right:'Vizela · Portugal'}
+};
+let curL='pt';
+function setL(l){curL=l;document.querySelectorAll('.lb').forEach(b=>b.classList.remove('on'));document.querySelector(`.lb[onclick="setL('${l}')"]`).classList.add('on');document.documentElement.lang=l;const t=T[l];document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(t[k]!==undefined)el.innerHTML=t[k];});}
+setL('pt');
+</script>
+</body>
+</html>

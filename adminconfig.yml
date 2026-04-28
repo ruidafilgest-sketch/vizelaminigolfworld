@@ -1,0 +1,99 @@
+backend:
+  name: github
+  repo: ruidafilgest-sketch/vizelaminigolfworld
+  branch: main
+  auth_scope: repo
+
+media_folder: "imagens"
+public_folder: "/imagens"
+
+locale: pt
+
+collections:
+
+  # NOTICIAS
+  - name: "noticias"
+    label: "Noticias"
+    label_singular: "Noticia"
+    folder: "_noticias"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titulo", name: "titulo", widget: "string" }
+      - { label: "Data", name: "data", widget: "datetime", format: "DD/MM/YYYY", date_format: "DD/MM/YYYY", time_format: false }
+      - label: "Categoria"
+        name: "categoria"
+        widget: "select"
+        options:
+          - { label: "SWC 2026 — Em Destaque", value: "swc" }
+          - { label: "Campeonato Nacional", value: "nacional" }
+          - { label: "Internacional", value: "internacional" }
+          - { label: "Local — Vizela", value: "local" }
+          - { label: "Academia Vizelgolfe", value: "academia" }
+      - { label: "Resumo (1-2 frases para a lista)", name: "resumo", widget: "text" }
+      - { label: "Texto completo", name: "body", widget: "markdown" }
+      - { label: "Foto (opcional)", name: "foto", widget: "image", required: false }
+
+  # DIARIO DE EVENTOS
+  - name: "diario"
+    label: "Diario de Eventos"
+    label_singular: "Entrada no Diario"
+    folder: "_diario"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titulo do Evento", name: "titulo", widget: "string" }
+      - { label: "Data do Evento", name: "data", widget: "datetime", format: "DD/MM/YYYY", date_format: "DD/MM/YYYY", time_format: false }
+      - label: "Tipo"
+        name: "tipo"
+        widget: "select"
+        options:
+          - { label: "SWC 2026", value: "swc" }
+          - { label: "Campeonato Nacional", value: "nacional" }
+          - { label: "Torneio Local", value: "local" }
+          - { label: "Internacional", value: "internacional" }
+      - { label: "Descricao", name: "body", widget: "text" }
+
+  # GALERIA
+  - name: "galeria"
+    label: "Galeria de Fotos"
+    label_singular: "Foto"
+    folder: "_galeria"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Legenda", name: "legenda", widget: "string" }
+      - { label: "Fotografia", name: "foto", widget: "image" }
+      - label: "Categoria"
+        name: "categoria"
+        widget: "select"
+        options:
+          - { label: "Campo Fonseca e Castro", value: "campo" }
+          - { label: "SWC 2026", value: "swc" }
+          - { label: "Campeonato Nacional", value: "nacional" }
+          - { label: "Atletas", value: "atletas" }
+          - { label: "Vizela — A Cidade", value: "cidade" }
+          - { label: "Historia", value: "historia" }
+      - { label: "Data (opcional)", name: "data", widget: "datetime", required: false, format: "DD/MM/YYYY", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: "Descricao (opcional)", name: "descricao", widget: "text", required: false }
+
+  # INFORMACOES DO SITE (editaveis)
+  - name: "config"
+    label: "Configuracoes do Site"
+    files:
+      - label: "Selecao Portuguesa SWC 2026"
+        name: "selecao"
+        file: "_data/selecao.json"
+        fields:
+          - label: "Atletas Masculinos"
+            name: "masculinos"
+            widget: "list"
+            fields:
+              - { label: "Nome completo", name: "nome", widget: "string" }
+              - { label: "Clube", name: "clube", widget: "string", required: false }
+          - label: "Atletas Femininas"
+            name: "femininas"
+            widget: "list"
+            fields:
+              - { label: "Nome completo", name: "nome", widget: "string" }
+              - { label: "Clube", name: "clube", widget: "string", required: false }
