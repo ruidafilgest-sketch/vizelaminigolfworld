@@ -1,1 +1,35 @@
+title: Vizela · Minigolf · World
+description: Portal independente do minigolfe em Vizela e no mundo
+baseurl: ""
+url: "https://vizelaminigolfeworld.com"
+lang: pt
 
+collections:
+  noticias:
+    output: true
+    permalink: /noticias/:slug/
+  diario:
+    output: false
+  galeria:
+    output: false
+
+defaults:
+  - scope:
+      path: ""
+      type: "noticias"
+    values:
+      layout: "noticia"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
