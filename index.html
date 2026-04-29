@@ -198,7 +198,7 @@ section{padding:80px 44px;}
 
 /* SWC SECTION */
 .swc-sec{background:var(--navy);position:relative;overflow:hidden;}
-.swc-sec::before{content:'';position:absolute;inset:0;background-image:url('https://img.youtube.com/vi/sNOPNcMESA0/maxresdefault.jpg');background-size:cover;background-position:center;opacity:0.06;}
+.swc-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(26,58,107,0.25) 0%,transparent 70%);}
 .swc-sec .section-kicker{color:var(--gold2);}
 .swc-sec .section-title{color:var(--white);}
 .swc-sec .section-title em{color:var(--gold2);}
@@ -258,7 +258,7 @@ section{padding:80px 44px;}
 
 /* COUNTRIES */
 .countries-sec{background:var(--navy);position:relative;overflow:hidden;}
-.countries-sec::before{content:'';position:absolute;inset:0;background-image:url('https://img.youtube.com/vi/w2QjfL3ClO8/maxresdefault.jpg');background-size:cover;background-position:center;opacity:0.05;}
+.countries-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(26,58,107,0.2) 0%,transparent 65%);}
 .countries-sec .section-kicker{color:rgba(255,255,255,0.45);}
 .countries-sec .section-title{color:var(--white);}
 .countries-sec .section-title em{color:var(--gold2);}
@@ -656,16 +656,22 @@ footer{background:var(--ink2);padding:56px 44px 32px;}
     <p class="section-lead" data-t="s_gal_l">A galeria cresce com o tempo — fotografias do campo, dos atletas, das competições e da cidade de Vizela.</p>
     <div class="gallery-grid">
       <div class="gallery-item">
-        <img src="https://img.youtube.com/vi/1QHeRhyLy6g/maxresdefault.jpg" alt="WMF World Championships 2019" loading="lazy">
-        <div class="gallery-caption" data-t="gal1">WMF World Championships 2019</div>
+        <div class="gallery-placeholder">
+          <svg class="gp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <div class="gp-text" data-t="gal1">WMF World Championships 2019</div>
+        </div>
       </div>
       <div class="gallery-item">
-        <img src="https://img.youtube.com/vi/sNOPNcMESA0/maxresdefault.jpg" alt="WMF World Championships 2015" loading="lazy">
-        <div class="gallery-caption" data-t="gal2">WMF World Championships 2015 — Lahti</div>
+        <div class="gallery-placeholder">
+          <svg class="gp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <div class="gp-text" data-t="gal2">WMF World Championships 2015</div>
+        </div>
       </div>
       <div class="gallery-item">
-        <img src="https://img.youtube.com/vi/w2QjfL3ClO8/maxresdefault.jpg" alt="WMF World Championships 2011" loading="lazy">
-        <div class="gallery-caption" data-t="gal3">WMF World Championships 2011 — Estocolmo</div>
+        <div class="gallery-placeholder">
+          <svg class="gp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <div class="gp-text" data-t="gal3">WMF World Championships 2011</div>
+        </div>
       </div>
       <div class="gallery-item">
         <div class="gallery-placeholder">
@@ -721,6 +727,44 @@ footer{background:var(--ink2);padding:56px 44px 32px;}
           <div class="di-title" data-t="d4_t">Começa o Campeonato do Mundo Sénior em Vizela</div>
           <div class="di-text" data-t="d4_d">O dia que Vizela esperou 55 anos. As equipas nacionais entram no Campo Fonseca e Castro. O mundo do minigolfe sénior tem uma capital: Vizela, Portugal.</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAL VIZELGOLFE -->
+<section style="background:var(--navy);padding:60px 44px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 20% 50%,rgba(200,148,58,0.08) 0%,transparent 70%);"></div>
+  <div style="max-width:1120px;margin:0 auto;position:relative;z-index:1;">
+    <div style="display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;">
+      <div>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(232,176,74,0.6);display:block;margin-bottom:10px;">Portal de Competição · Vizelgolfe</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,42px);font-weight:700;color:#ffffff;line-height:1.1;margin-bottom:14px;">Resultados e classificações <em style="color:var(--gold2);font-style:italic;">em tempo real</em></h2>
+        <p style="font-size:15px;color:rgba(255,255,255,0.5);line-height:1.7;font-weight:300;max-width:560px;">Acompanha o Campeonato de Vizela, o Campeonato Nacional Individual e todos os resultados da Vizelgolfe — Associação de Minigolfe de Vizela. Classificações, pontuações e perfis de atletas.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end;">
+        <a href="https://vizelgolfe.net" target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;gap:10px;
+          background:var(--gold);color:var(--navy);
+          font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;
+          letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;
+          padding:14px 28px;transition:all 0.2s;white-space:nowrap;
+          box-shadow:0 4px 20px rgba(200,148,58,0.3);"
+          onmouseover="this.style.background='#f5c96a';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.background='#c8943a';this.style.transform='translateY(0)'">
+          Campeonato de Vizela →
+        </a>
+        <a href="https://vizelgolfe.net" target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;gap:10px;
+          background:transparent;color:rgba(255,255,255,0.6);
+          font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;
+          letter-spacing:1px;text-transform:uppercase;text-decoration:none;
+          padding:10px 28px;border:1px solid rgba(255,255,255,0.15);
+          transition:all 0.2s;white-space:nowrap;"
+          onmouseover="this.style.borderColor='rgba(200,148,58,0.4)';this.style.color='#e8b04a'"
+          onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.6)'">
+          Portal Nacional →
+        </a>
       </div>
     </div>
   </div>
