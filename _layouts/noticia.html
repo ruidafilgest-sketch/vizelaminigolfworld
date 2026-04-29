@@ -1,0 +1,40 @@
+---
+layout: default
+---
+<div style="padding-top:66px;min-height:100vh;background:var(--sage);">
+
+  <div style="background:var(--navy);padding:80px 44px 60px;">
+    <div style="max-width:800px;margin:0 auto;">
+      <a href="/" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(232,176,74,0.6);text-decoration:none;display:inline-block;margin-bottom:20px;">← Voltar ao portal</a>
+      {% if page.categoria %}
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold2);margin-bottom:12px;">
+        {% if page.categoria == 'swc' %}SWC 2026 · Em Destaque
+        {% elsif page.categoria == 'nacional' %}Campeonato Nacional
+        {% elsif page.categoria == 'local' %}Local · Vizela
+        {% elsif page.categoria == 'academia' %}Academia Vizelgolfe
+        {% else %}Internacional{% endif %}
+      </div>
+      {% endif %}
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,52px);font-weight:700;color:#ffffff;line-height:1.1;margin-bottom:16px;">{{ page.titulo }}</h1>
+      {% if page.data %}
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:1px;">{{ page.data | date: "%d/%m/%Y" }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if page.foto %}
+  <div style="max-width:800px;margin:0 auto;padding:0 44px;">
+    <img src="{{ page.foto }}" alt="{{ page.titulo }}" style="width:100%;max-height:480px;object-fit:cover;margin-top:-30px;box-shadow:0 8px 40px rgba(0,0,0,0.2);">
+  </div>
+  {% endif %}
+
+  <div style="max-width:800px;margin:0 auto;padding:48px 44px 80px;">
+    <div style="font-size:16px;color:var(--muted);line-height:1.85;font-weight:300;">
+      {{ content }}
+    </div>
+    <div style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border2);">
+      <a href="/" style="display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue);text-decoration:none;">← Voltar ao portal</a>
+    </div>
+  </div>
+
+</div>
