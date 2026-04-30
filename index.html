@@ -19,13 +19,32 @@ layout: default
     <button class="nb" onclick="go('gallery')" data-t="nav_gallery">Galeria</button>
     <button class="nb" onclick="go('links')" data-t="nav_links">Federações</button>
   </nav>
-  <div class="lang-row">
-    <button class="lb on" onclick="setL('pt')"><img src="https://flagcdn.com/w20/pt.png" width="18" style="border-radius:2px;vertical-align:middle;"> PT</button>
-    <button class="lb" onclick="setL('en')"><img src="https://flagcdn.com/w20/gb.png" width="18" style="border-radius:2px;vertical-align:middle;"> EN</button>
-    <button class="lb" onclick="setL('es')"><img src="https://flagcdn.com/w20/es.png" width="18" style="border-radius:2px;vertical-align:middle;"> ES</button>
-    <button class="lb" onclick="setL('de')"><img src="https://flagcdn.com/w20/de.png" width="18" style="border-radius:2px;vertical-align:middle;"> DE</button>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="lang-row">
+      <button class="lb on" onclick="setL('pt')"><img src="https://flagcdn.com/w20/pt.png" width="18" style="border-radius:2px;vertical-align:middle;"> PT</button>
+      <button class="lb" onclick="setL('en')"><img src="https://flagcdn.com/w20/gb.png" width="18" style="border-radius:2px;vertical-align:middle;"> EN</button>
+      <button class="lb" onclick="setL('es')"><img src="https://flagcdn.com/w20/es.png" width="18" style="border-radius:2px;vertical-align:middle;"> ES</button>
+      <button class="lb" onclick="setL('de')"><img src="https://flagcdn.com/w20/de.png" width="18" style="border-radius:2px;vertical-align:middle;"> DE</button>
+    </div>
+    <button id="hambBtn" onclick="toggleMenu()" style="display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px;align-items:center;justify-content:center;">
+      <span style="display:block;width:22px;height:2px;background:var(--gold2);transition:all 0.3s;"></span>
+      <span style="display:block;width:22px;height:2px;background:var(--gold2);transition:all 0.3s;"></span>
+      <span style="display:block;width:22px;height:2px;background:var(--gold2);transition:all 0.3s;"></span>
+    </button>
   </div>
 </header>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" style="display:none;position:fixed;top:66px;left:0;right:0;bottom:0;background:rgba(8,18,42,0.98);z-index:499;flex-direction:column;padding:32px 28px;gap:4px;overflow-y:auto;">
+  <button class="nb" onclick="goMob('news')" data-t="nav_news" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Notícias</button>
+  <button class="nb" onclick="goMob('swc')" data-t="nav_swc" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">SWC 2026</button>
+  <button class="nb" onclick="goMob('hist')" data-t="nav_hist" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">História</button>
+  <button class="nb" onclick="goMob('disciplinas')" data-t="nav_disc" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Disciplinas</button>
+  <button class="nb" onclick="goMob('nacoes')" data-t="nav_nac" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Nações</button>
+  <button class="nb" onclick="goMob('vizela')" data-t="nav_vizela" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Vizela</button>
+  <button class="nb" onclick="goMob('gallery')" data-t="nav_gallery" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Galeria</button>
+  <button class="nb" onclick="goMob('links')" data-t="nav_links" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;width:100%;">Federações</button>
+</div>
 
 </div>
 
@@ -835,6 +854,29 @@ function openLightbox(src,label){
     document.body.style.overflow='hidden';
   }
 }
+
+// HAMBURGER MENU
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  const b=document.getElementById('hambBtn');
+  const open=m.style.display==='flex';
+  m.style.display=open?'none':'flex';
+  document.body.style.overflow=open?'':'hidden';
+}
+function goMob(id){
+  document.getElementById('mobileMenu').style.display='none';
+  document.body.style.overflow='';
+  setTimeout(()=>go(id),100);
+}
+// Show hamburger on mobile
+if(window.innerWidth<=900){
+  const b=document.getElementById('hambBtn');
+  if(b)b.style.display='flex';
+}
+window.addEventListener('resize',()=>{
+  const b=document.getElementById('hambBtn');
+  if(b)b.style.display=window.innerWidth<=900?'flex':'none';
+});
 
 // SCROLL REVEAL
 const _observer = new IntersectionObserver((entries)=>{
