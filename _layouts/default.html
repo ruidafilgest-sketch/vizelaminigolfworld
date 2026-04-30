@@ -363,8 +363,10 @@ footer{background:var(--ink2);padding:56px 44px 32px;}
 .fc-right{font-size:11px;color:rgba(255,255,255,0.13);}
 
 @media(max-width:900px){
-  header{padding:0 20px;}
+  header{padding:0 16px;}
   nav{display:none;}
+  .lang-row{display:none;}
+  #hambBtn{display:flex!important;}
   section{padding:56px 20px;}
   .hero{padding:90px 22px 60px;text-align:center;}
   .band-item{padding:12px 16px;}
@@ -380,11 +382,10 @@ footer{background:var(--ink2);padding:56px 44px 32px;}
   .swc-cd{gap:16px;}
   .cd-n{font-size:32px;}
   .word-dot{margin:0 6px;}
-  .lang-row{gap:2px;}
-  .lb{padding:4px 7px;font-size:10px;}
   .hero-tagline{font-size:15px;}
   .countries-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr));}
   .team-grid{grid-template-columns:1fr;}
+  .swc-cd .cd-unit:not(:last-child)::after{display:none;}
 }
 
 @media(max-width:600px){
