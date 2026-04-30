@@ -30,7 +30,8 @@ plugins:
 
 include:
   - imagens
-
+amlkeep_files:
+  - imagens
 exclude:
   - Gemfile
   - Gemfile.lock
