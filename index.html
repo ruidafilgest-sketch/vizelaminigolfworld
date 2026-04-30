@@ -35,15 +35,22 @@ layout: default
 </header>
 
 <!-- MOBILE MENU -->
-<div id="mobileMenu" style="display:none;position:fixed;top:66px;left:0;right:0;bottom:0;background:rgba(8,18,42,0.98);z-index:499;flex-direction:column;padding:32px 28px;gap:4px;overflow-y:auto;">
-  <button class="nb" onclick="goMob('news')" data-t="nav_news" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Notícias</button>
-  <button class="nb" onclick="goMob('swc')" data-t="nav_swc" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">SWC 2026</button>
-  <button class="nb" onclick="goMob('hist')" data-t="nav_hist" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">História</button>
-  <button class="nb" onclick="goMob('disciplinas')" data-t="nav_disc" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Disciplinas</button>
-  <button class="nb" onclick="goMob('nacoes')" data-t="nav_nac" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Nações</button>
-  <button class="nb" onclick="goMob('vizela')" data-t="nav_vizela" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Vizela</button>
-  <button class="nb" onclick="goMob('gallery')" data-t="nav_gallery" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Galeria</button>
-  <button class="nb" onclick="goMob('links')" data-t="nav_links" style="color:rgba(255,255,255,0.8);font-size:18px;text-align:left;padding:16px 0;width:100%;">Federações</button>
+<div id="mobileMenu" style="display:none;position:fixed;top:66px;left:0;right:0;bottom:0;background:rgba(8,18,42,0.98);z-index:499;flex-direction:column;padding:24px 28px;gap:0;overflow-y:auto;">
+  <!-- Línguas no topo do menu -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+    <button class="lb on" onclick="setL('pt');toggleMenu()" style="flex:1;justify-content:center;"><img src="https://flagcdn.com/w20/pt.png" width="18" style="border-radius:2px;vertical-align:middle;"> PT</button>
+    <button class="lb" onclick="setL('en');toggleMenu()" style="flex:1;justify-content:center;"><img src="https://flagcdn.com/w20/gb.png" width="18" style="border-radius:2px;vertical-align:middle;"> EN</button>
+    <button class="lb" onclick="setL('es');toggleMenu()" style="flex:1;justify-content:center;"><img src="https://flagcdn.com/w20/es.png" width="18" style="border-radius:2px;vertical-align:middle;"> ES</button>
+    <button class="lb" onclick="setL('de');toggleMenu()" style="flex:1;justify-content:center;"><img src="https://flagcdn.com/w20/de.png" width="18" style="border-radius:2px;vertical-align:middle;"> DE</button>
+  </div>
+  <button class="nb" onclick="goMob('news')" data-t="nav_news" style="color:rgba(255,255,255,0.8);font-size:17px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Notícias</button>
+  <button class="nb" onclick="goMob('swc')" data-t="nav_swc" style="color:rgba(255,255,255,0.8);font-size:17px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">SWC 2026</button>
+  <button class="nb" onclick="goMob('hist')" data-t="nav_hist" style="color:rgba(255,255,255,0.8);font-size:17px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">História</button>
+  <button class="nb" onclick="goMob('disciplinas')" data-t="nav_disc" style="color:rgba(255,255,255,0.8);font-size:17px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Disciplinas</button>
+  <button class="nb" onclick="goMob('nacoes')" data-t="nav_nac" style="color:rgba(255,255,255,0.8);font-size:17px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Nações</button>
+  <button class="nb" onclick="goMob('vizela')" data-t="nav_vizela" style="color:rgba(255,255,255,0.8);font-size:17px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Vizela</button>
+  <button class="nb" onclick="goMob('gallery')" data-t="nav_gallery" style="color:rgba(255,255,255,0.8);font-size:17px;text-align:left;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;">Galeria</button>
+  <button class="nb" onclick="goMob('links')" data-t="nav_links" style="color:rgba(255,255,255,0.8);font-size:17px;text-align:left;padding:16px 0;width:100%;">Federações</button>
 </div>
 
 </div>
@@ -817,14 +824,24 @@ layout: default
 </footer>
 
 <script>
-window.addEventListener('load',()=>{document.getElementById('heroBg').classList.add('loaded');});
+document.addEventListener('DOMContentLoaded',()=>{
+
+window.addEventListener('load',()=>{
+  const bg=document.getElementById('heroBg');
+  if(bg)bg.classList.add('loaded');
+});
+
 function tick(){
   const t=new Date('2026-10-14T09:00:00'),n=new Date(),d=t-n;
   if(d<=0)return;
-  document.getElementById('cd-d').textContent=Math.floor(d/86400000);
-  document.getElementById('cd-h').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
-  document.getElementById('cd-m').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
-  document.getElementById('cd-s').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0');
+  const dd=document.getElementById('cd-d');
+  const dh=document.getElementById('cd-h');
+  const dm=document.getElementById('cd-m');
+  const ds=document.getElementById('cd-s');
+  if(dd)dd.textContent=Math.floor(d/86400000);
+  if(dh)dh.textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+  if(dm)dm.textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+  if(ds)ds.textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0');
 }
 tick();setInterval(tick,1000);
 function go(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
@@ -934,6 +951,19 @@ es:{logo_sub:'Portal Independiente del Minigolf',nav_news:'Noticias',nav_swc:'SW
 de:{logo_sub:'Unabhängiges Minigolf-Portal',nav_news:'Neuigkeiten',nav_swc:'SWC 2026',nav_hist:'Geschichte',nav_vizela:'Vizela',nav_gallery:'Galerie',nav_links:'Verbände',hero_kicker:'Vizela · Portugal · Wiege des Minigolfs · Seit 1968',hero_tagline:'Eine Stadt. Eine Leidenschaft. Eine Geschichte von über 55 Jahren.<br>Vizela und Minigolf — zwei Namen, die die Welt zusammen kennenlernte.',swc_kicker:'Im Fokus · SWC 2026',swc_name:'Senioren-Weltmeisterschaft · Vizela',cd_d:'Tage',cd_h:'Std.',cd_m:'Min.',cd_s:'Sek.',band1:'Gründung in Vizela',band2:'Jahre Geschichte',band3:'Internationale Events',band4:'Länder letzter SWC',band5:'Oktober 2026',s_news_k:'Neueste Nachrichten',s_news_t:'Was gerade <em>passiert</em>',k_swc:'SWC 2026 · Im Fokus',k_nat:'Nationale Meisterschaft',k_loc:'Lokal',k_int:'International',n1_t:'Vizela empfängt die Senioren-Minigolf-WM im Oktober 2026',n1_d:'Vom 14.–17. Oktober 2026 wird Vizela Welthauptstadt des Senioren-Minigolfs.',n2_t:'Vizela empfängt die 2. Nationale Runde mit 86 Athleten',n2_d:'Am 25.–26. April 2026 war Vizela Zentrum des nationalen Minigolfs.',n3_t:'Portugiesisches Senioren-Team für SWC 2026 bestätigt',n3_d:'11 Athleten bereit, Portugal im eigenen Land zu vertreten.',n4_t:'Academia Vizelgolfe — die nächste Generation wächst',n4_d:'Die Academia bildet weiterhin junge Athleten aus.',s_swc_k:'SWC 2026 · Vizela · Portugal',s_swc_t:'Die Welt kommt nach <em>Vizela</em>',s_swc_l:'Das größte Ereignis in Vizelas Geschichte. 55 Jahre nach der ersten EM empfängt Portugal die Senioren-WM.',sf_dates:'Datum',sf_local:'Austragungsort',sf_local_v:'"Fonseca e Castro" Anlage, Kurpark, Vizela',sf_disc:'Disziplinen',sf_disc_v:'Minigolf + Petergolf — je 18 Bahnen, WMF',sf_form:'Format',sf_form_v:'Mannschaftswettkampf — Senioren',sf_org:'Organisation',sf_org_v:'EMF mit Unterstützung der Stadt Vizela',sf_site:'Offizielle Website',team_k:'Portugiesisches Team SWC 2026',cat_m:'Senioren Männer',cat_f:'Senioren Frauen',s_hist_k:'Wiege des Minigolfs in Portugal',s_hist_t:'Eine Geschichte von <em>über 55 Jahren</em>',hist_p1:'1968 brachte <strong>Fonseca e Castro</strong> die ersten Minigolfbahnen nach Portugal.',hist_p2:'1970: erste Nationale. 1971: erste EM. 2012: European Cup. 2016: EM und Nations Cup.',hist_p3:'2026 empfängt der <strong>Fonseca e Castro Platz</strong> die Senioren-WM.',tl1_t:'Minigolf wird in Portugal geboren',tl1_d:'Fonseca e Castro installiert die ersten Bahnen in Vizela.',tl2_t:'1. Nationale Meisterschaft',tl2_d:'Vizela organisiert die erste Nationale.',tl3_t:'IX. Europameisterschaft — erste in Portugal',tl3_d:'Mit Deutschland, Schweden, Dänemark, Niederlande, Italien, Schweiz und Portugal.',tl4_t:'European Cup — 150 Athleten',tl4_d:'150 europäische Athleten zwei Wochen in Vizela.',tl5_t:'Europameisterschaft + Nations Cup',tl5_d:'Nations Cup im Mai und EM im August 2016.',tl6_t:'SWC 2026 — Senioren-WM',tl6_d:'58 Jahre nach dem Beginn kommt die ganze Welt nach Vizela.',s_ctry_k:'Letzter SWC · Länder',s_ctry_t:'Die Welt des <em>Senioren-Minigolfs</em>',s_ctry_l:'Diese Länder nahmen am letzten SWC teil. 2026 kehren sie nach Vizela zurück.',ctry_note:'Basierend auf dem letzten SWC. Anmeldungen 2026 offen.',s_viz_k:'Die Gastgeberstadt',s_viz_t:'Vizela — <em>Königin der Thermen</em>',viz_p1:'Vizela ist eine Stadt, die <strong>ihre Besucher überrascht</strong>. Eingebettet in ein üppiges Tal im Herzen des Minho, an den Ufern des Flusses Vizela, ist sie ein Land mit über zweitausend Jahren Geschichte.',viz_p2:'Der <strong>Gemeindepark "Fonseca e Castro"</strong> liegt im Kurpark, umgeben von jahrhundertealten Bäumen und wenige Meter vom Fluss Vizela entfernt.',viz_p3:'Der <strong>Flughafen Porto</strong> ist nur 40 Minuten entfernt, mit Direktverbindungen in ganz Europa — Vizela ist für internationale Athleten gut erreichbar.',vf1_t:'Kurpark · Fonseca e Castro',vf1_d:'6.800 m², 18 Mini + 18 Peter, WMF.',vf2_t:'Kurpark · Fluss Vizela',vf2_d:'7,5 Hektar jahrhundertealter Bäume am Fluss Vizela. Die grüne Lunge der Stadt.',vf3_t:'Flughafen Porto — 40 Min.',vf3_d:'Direktverbindungen in ganz Europa.',vf4_t:'Unterkunft',vf4_d:'Thermal-Hotel Vizela und Optionen in der umliegenden Region.',vf5_t:'Minho-Küche',vf5_d:'Traditionelle Küche, Kabeljau, Vinho Verde.',s_gal_k:'Galerie',s_gal_t:'Bilder des <em>Minigolfs und Vizelas</em>',s_gal_l:'Vizela, nationaler und internationaler Minigolf — in Bildern.',gal1:'WMF World Championships 2019',gal2:'WMF World Championships 2015',gal3:'WMF World Championships 2011',gal_ph1:'Fonseca e Castro Anlage',gal_ph2:'SWC 2026 · Demnächst',s_diary_k:'Tagebuch · Der Weg zum Oktober',s_diary_t:'Was gerade <em>passiert</em>',s_diary_l:'Protokoll des Weges zum SWC 2026.',tag_nat:'National',tag_swc:'SWC 2026',d1_t:'2. Nationale Runde in Vizela — 86 Athleten',d1_d:'86 Athleten im Fonseca e Castro Course.',d2_t:'Vereinsmeisterschaft — Porto',d2_d:'Vizelgolfe und Senioren-Athleten in Porto.',d3_t:'3. Nationale Runde — Lamego',d3_d:'Die entscheidende Runde.',d4_t:'SWC 2026 beginnt in Vizela',d4_d:'Der Tag, auf den Vizela 55 Jahre gewartet hat.',portal_k:'Wettkampf-Portal · Vizelgolfe',portal_t:'Ergebnisse und Ranglisten <em style="color:var(--gold2);font-style:italic;">in Echtzeit</em>',portal_d:'Verfolge die Vizela-Meisterschaft, die Nationale Einzelmeisterschaft und alle Vizelgolfe-Ergebnisse. Ranglisten, Ergebnisse und Athletenprofile.',s_links_k:'Verbände und Links',s_links_t:'Die <em>offizielle Welt</em> des Minigolfs',lc1_type:'Offizielle Website',lc1_name:'SWC 2026 Vizela',lc1_desc:'Offizielle Website der Senioren-WM 2026.',lc2_type:'Nationaler Verband',lc2_name:'FPM — Portugiesischer Verband',lc2_desc:'Der portugiesische Minigolf-Verband.',lc3_type:'Europäischer Verband',lc3_name:'EMF — European Minigolf',lc3_desc:'Organisiert EMs und den SWC.',lc4_type:'Weltverband',lc4_name:'WMF — World Minigolf',lc4_desc:'65 nationale Verbände weltweit.',fb_desc:'Unabhängiges Portal für Minigolf in Vizela und weltweit.',fn_label:'Redaktioneller Hinweis',fn_text:'Unabhängiges Portal ohne Zugehörigkeit zu offiziellen Verbänden.',fc_domain:'vizelaminigolfeworld.com',fc_right:'Vizela · Portugal'}
 };
 let curL='pt';
-function setL(l){curL=l;document.querySelectorAll('.lb').forEach(b=>b.classList.remove('on'));document.querySelector(`.lb[onclick="setL('${l}')"]`).classList.add('on');document.documentElement.lang=l;const t=T[l];document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(t[k]!==undefined)el.innerHTML=t[k];});}
+function setL(l){
+  curL=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.remove('on'));
+  const btn=document.querySelector(`.lb[onclick*="setL('${l}')"]`);
+  if(btn)btn.classList.add('on');
+  document.documentElement.lang=l;
+  const t=T[l];
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const k=el.getAttribute('data-t');
+    if(t&&t[k]!==undefined)el.innerHTML=t[k];
+  });
+}
 setL('pt');
+
+}); // end DOMContentLoaded
 </script>
